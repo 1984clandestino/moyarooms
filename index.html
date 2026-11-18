@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moya Rooms – Apartamenty we Włoszech</title>
+<meta name="description" content="Apartamenty na południu Włoch: Katania, Palermo i Avola. Kontakt i rezerwacja po polsku.">
+<link rel="canonical" href="https://moyarooms.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Moya Rooms">
+<meta property="og:title" content="Moya Rooms – Apartamenty we Włoszech">
+<meta property="og:description" content="Apartamenty na południu Włoch: Katania, Palermo i Avola. Kontakt i rezerwacja po polsku.">
+<meta property="og:url" content="https://moyarooms.com/">
+<meta property="og:image" content="https://moyarooms.com/img/hero.jpg">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* VOICE: caldo, ospitale, chiaro: qualcuno che ti apre casa al sud
+   IDEA: l'arco siciliano come cornice delle foto vere
+   PICTURE: foto reale del tramonto a San Giovanni Li Cuti dentro un arco marrone
+   COLOUR/TYPE: sabbia dominante, marrone per testi, azzurro solo per azioni; Outfit + DM Sans
+   LAYOUT: hero, regioni con schede e galleria, 3 passi, contatti, footer societario */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#1f1610);--sand:light-dark(#EFE6D8,#2b2018);--card:light-dark(#ffffff,#2f241b);
+--ink:light-dark(#3b2a20,#f1e8db);--soft:light-dark(#6b5444,#cdbca8);--brown:light-dark(#8B5A3C,#d9a57f);
+--blue:#1F8FB0;--blue-ink:light-dark(#176f89,#7cc8de);--line:light-dark(#e2d8c8,#4a3a2d);
+--sky:light-dark(#e8f3f7,#24363f);--todo:light-dark(#fff4d6,#4a3b16)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Outfit,system-ui,sans-serif;color:var(--brown);line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,54px);font-weight:600}
+h2{font-size:clamp(26px,4vw,36px);font-weight:600;margin-bottom:10px}
+h3{font-size:21px;font-weight:600}
+p{margin:0}
+a{color:var(--blue-ink)}
+img{max-width:100%;display:block}
+.band{padding:clamp(36px,6vw,80px) max(5vw,16px)}
+.wrap{max-width:1180px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;font:500 16px "DM Sans",sans-serif;text-decoration:none;border:2px solid var(--blue);cursor:pointer;transition:transform .15s;background:transparent;color:var(--blue-ink)}
+.btn:hover{transform:translateY(-1px)}
+.btn.main{background:var(--blue);color:#fff}
+.btn.sm{min-height:40px;padding:0 14px;font-size:15px}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.todo{background:var(--todo);color:var(--ink);border:1.5px dashed #c99a2e;border-radius:6px;padding:1px 6px;font-size:.9em}
+.draft{background:var(--todo);color:var(--ink);text-align:center;font-size:14px;padding:8px 16px;border-bottom:1.5px dashed #c99a2e}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px max(5vw,16px);max-width:1280px;margin:0 auto}
+.logo{font-family:Outfit,sans-serif;font-weight:600;font-size:22px;color:var(--brown);text-decoration:none}
+.logo span{color:var(--blue-ink)}
+.links{display:flex;gap:4px 18px;flex-wrap:wrap;align-items:center}
+.links a{color:var(--ink);text-decoration:none;font-size:15px;padding:8px 0}
+.links a:hover{color:var(--blue-ink)}
+.hero{background:var(--sand)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--soft);margin:18px 0 24px;max-width:34em}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chips span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;color:var(--brown)}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.arch{margin:0;border:10px solid #8B5A3C;border-radius:48% 48% 14px 14px / 34% 34% 14px 14px;overflow:hidden;aspect-ratio:4/4.4;background:var(--sky)}
+.arch img{width:100%;height:100%;object-fit:cover}
+figcaption{font-size:13px;color:var(--soft);margin-top:8px;text-align:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.filters button{min-height:40px;padding:0 16px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--brown);border-color:var(--brown);color:#fff}
+.region{margin-top:30px}
+.region>h3{font-size:24px;display:flex;align-items:baseline;gap:10px}
+.region>h3 small{font:400 15px "DM Sans",sans-serif;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin-top:16px}
+.apt{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.ph{aspect-ratio:4/3;background:var(--sky);position:relative;display:grid;place-items:center;border:0;padding:0;width:100%;cursor:pointer;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ph:hover img{transform:scale(1.03)}
+.ph .n{position:absolute;right:10px;bottom:10px;background:rgba(31,22,16,.72);color:#fff;font-size:13px;border-radius:8px;padding:4px 10px}
+.ph b{font-family:Outfit,sans-serif;font-size:60px;color:var(--brown);opacity:.25}
+.ph .todo{position:absolute;left:12px;bottom:10px}
+.in{padding:18px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.where{color:var(--blue-ink);font-weight:500;font-size:15px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{background:var(--sand);color:var(--brown);border-radius:8px;padding:4px 10px;font-size:14px}
+.in p{color:var(--soft)}
+.units{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.units li{border-left:3px solid var(--blue);padding-left:10px;color:var(--soft)}
+.units b{color:var(--ink);font-weight:500}
+.more{border-top:1px solid var(--line);padding-top:10px}
+.more summary{cursor:pointer;color:var(--blue-ink);font-weight:500;min-height:32px;display:flex;align-items:center}
+.more p{margin-top:8px;font-size:15px}
+.more b{color:var(--ink);font-weight:500}
+.foot{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:6px}
+.cin{font-size:13px;color:var(--soft)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px;margin-top:24px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font:600 18px Outfit,sans-serif;margin-bottom:14px}
+.step p{color:var(--soft);margin-top:6px}
+.contact{background:#8B5A3C;color:#fff}
+.contact h2{color:#fff}
+.contact .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;align-items:center}
+.contact p{color:#f3e7da;font-size:17px}
+.cbox{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:22px;display:grid;gap:12px}
+.cbox .big{color:#fff;font-size:20px;font-weight:500;white-space:nowrap}
+.cbox a{color:#fff}
+footer{background:var(--sand);color:var(--soft);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.fab{position:fixed;right:18px;bottom:18px;z-index:6;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.fab svg{width:30px;height:30px}
+.lb{position:fixed;inset:0;z-index:20;background:rgba(15,10,6,.92);display:none;align-items:center;justify-content:center;padding:56px 12px 70px}
+.lb.on{display:flex}
+.lb img{max-width:min(1100px,100%);max-height:100%;object-fit:contain;border-radius:8px}
+.lb button{position:absolute;min-width:48px;min-height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer}
+.lb .x{top:10px;right:10px}.lb .pv{left:10px;top:50%;transform:translateY(-50%)}.lb .nx{right:10px;top:50%;transform:translateY(-50%)}
+.lb .cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#f1e8db;font-size:15px}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.arch{max-width:440px;margin-inline:auto;width:100%}}
+@media(max-width:600px){.links a.hide-s{display:none}.acts .btn{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.ph img{transition:none}}
+</style>
+</head>
+<body>
+
+
+<header>
+<nav class="nav" aria-label="Menu główne">
+<a class="logo" href="#top">Moya <span>Rooms</span></a>
+<div class="links">
+<a href="#apartamenty">Apartamenty</a>
+<a href="#rezerwacja" class="hide-s">Jak zarezerwować</a>
+<a href="#kontakt">Kontakt</a>
+</div>
+</nav>
+</header>
+
+<main id="top">
+<section class="hero band">
+<div class="wrap">
+<div>
+<h1>Apartamenty na południu Włoch</h1>
+<p class="lead">Wybierz apartament, napisz do nas po polsku i zarezerwuj bezpośrednio.</p>
+<div class="chips" id="cities"></div>
+<div class="acts">
+<a class="btn main wa" href="#kontakt">Napisz na WhatsApp</a>
+<a class="btn" href="#apartamenty">Zobacz apartamenty</a>
+</div>
+</div>
+<figure style="margin:0">
+<div class="arch"><img src="img/hero.jpg" alt="Zachód słońca nad zatoczką San Giovanni Li Cuti w Katanii" width="1600" height="1200"></div>
+<figcaption>San Giovanni Li Cuti, Katania – kilka kroków od App. Adriana</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="apartamenty" class="band">
+<div class="wrap">
+<h2>Nasze apartamenty</h2>
+<p style="color:var(--soft);max-width:42em">Napisz, kiedy przyjeżdżasz i ile was jest – pomożemy wybrać najlepszą opcję.</p>
+<div class="filters" id="filters" role="group" aria-label="Region"></div>
+<div id="list"></div>
+</div>
+</section>
+
+<section id="rezerwacja" class="band" style="background:var(--sand)">
+<div class="wrap">
+<h2>Jak zarezerwować</h2>
+<div class="steps">
+<div class="step"><h3>Napisz do nas</h3><p>Na WhatsApp lub e-mailem: termin, liczba osób i apartament, który Cię interesuje.</p></div>
+<div class="step"><h3>Sprawdzamy dostępność</h3><p>Odpowiadamy po polsku i wysyłamy cenę za Twój termin.</p></div>
+<div class="step"><h3>Potwierdzamy rezerwację</h3><p>Dostajesz potwierdzenie i wszystkie informacje o przyjeździe.</p></div>
+</div>
+</div>
+</section>
+
+<section id="wycieczki" class="band" hidden>
+<div class="wrap"><h2>Wycieczki</h2><p>Sekcja w przygotowaniu.</p></div>
+</section>
+
+<section id="kontakt" class="contact band">
+<div class="wrap">
+<div>
+<h2>Kontakt</h2>
+<p>Napisz do nas po polsku – pomożemy wybrać apartament i termin.</p>
+</div>
+<div class="cbox">
+<a class="btn main wa" href="#kontakt">Napisz na WhatsApp</a>
+<div>WhatsApp: <span class="big">+39 344 650 1947</span></div>
+<div>E-mail: <a class="big" href="mailto:info@moyarooms.com">info@moyarooms.com</a></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="band" style="padding-block:28px">
+<div class="wrap">
+<div><strong style="color:var(--brown)">Moya Rooms</strong> · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria</div>
+<div><a href="polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
+</div>
+</footer>
+
+<a class="fab wa" href="#kontakt" aria-label="Napisz na WhatsApp">
+<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.3z"/></svg>
+</a>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Galeria zdjęć">
+<img id="lbImg" alt="">
+<button class="x" id="lbX" aria-label="Zamknij">×</button>
+<button class="pv" id="lbP" aria-label="Poprzednie zdjęcie">‹</button>
+<button class="nx" id="lbN" aria-label="Następne zdjęcie">›</button>
+<div class="cap" id="lbC"></div>
+</div>
+
+<script>
+{
+const WA='393446501947';
+const waLink=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
+const APTS=[
+{id:'adriana',name:'App. Adriana',region:'Sycylia',city:'Katania',where:'Katania · via San Giovanni Li Cuti, 5 m od morza',
+ cin:'IT087015C2GIH6N5EO',
+ desc:'Całe mieszkanie z niezależnym wejściem w sercu rybackiej osady San Giovanni Li Cuti – kilka metrów od małego portu i czarnej plaży, blisko centrum Katanii.',
+ tags:['do 4 osób','80 m²','sypialnia z łóżkiem małżeńskim','rozkładana sofa w salonie','minimalny pobyt: 1 noc'],
+ equip:['Wi-Fi','klimatyzacja','wentylatory','moskitiery','grzejnik gazowy','kuchnia z jadalnią i pełnym wyposażeniem','piekarnik','mikrofalówka','ekspres do kawy','pralka','suszarka do włosów','ręczniki','pościel','koce','dziedziniec ze stolikiem'],
+ info:[['Dla rodzin z dziećmi','Na życzenie bezpłatnie łóżeczko (1–4 lata), przewijak i krzesełko do karmienia.'],['Zameldowanie / wymeldowanie','11:00–23:30 / 8:00–11:00'],['Zasady','Zakaz palenia, bez zwierząt, bez imprez.'],['Parking','Samochodem nie podjedziesz pod sam dom. Bezpłatnie zaparkujesz na nadmorskiej promenadzie lub na Piazza Tricolore, naprzeciwko hotelu Plaza. Płatny parking kryty: Borghetto Europa, 5 minut pieszo.'],['Dojazd','Z lotniska dojedziesz pociągiem do stacji Catania Europa. W pobliżu jest też stacja metra Galatea.']],
+ imgs:[['adriana-01','Wejście do budynku'],['adriana-02','Salon'],['adriana-03','Kuchnia z jadalnią'],['adriana-04','Sypialnia'],['adriana-05','Sypialnia z łóżeczkiem dla dziecka'],['adriana-06','Łazienka'],['adriana-07','Patio'],['adriana-08','Korytarz'],['adriana-09','Morze w San Giovanni Li Cuti'],['adriana-10','Zachód słońca nad zatoczką']]},
+{id:'peppe',name:'App. Peppe',region:'Sycylia',city:'Katania',where:'Katania · via Riccardo da Lentini, 300 m od centrum',
+ cin:'IT087015C2TU2PDBYJ',
+ desc:'Duże mieszkanie w zabytkowej kamienicy w samym sercu Katanii, kilka kroków od Piazza Duomo. Pod domem lokale i street food – samochód nie jest potrzebny.',
+ units:[['2 pokoje trzyosobowe','łóżko małżeńskie + pojedyncze, każdy z własną prywatną łazienką (poza pokojem); jeden z widokiem na miasto'],['Mini-apartament','pokój z kuchnią i łazienką: łóżko małżeńskie + 2 dostawki, do 4 osób'],['Całe mieszkanie','do 12 osób']],
+ equip:['Wi-Fi','klimatyzacja','ogrzewanie','ekspres do kawy','mikrofalówka','toster','czajnik','minibar','ręczniki','suszarka do włosów','salon z jadalnią tylko dla gości','taras'],
+ info:[['Pokoje','Bez dostępu do kuchni – do dyspozycji ekspres do kawy, mikrofalówka i toster.'],['Dzieci','Mile widziane w każdym wieku. Dostawka dla dziecka (4–14 lat) na życzenie; brak łóżeczek.'],['Zameldowanie / wymeldowanie','13:30–23:30 / 6:00–10:00'],['Zasady','Cisza nocna 23:00–7:00, bez imprez; zwierzęta na życzenie.']],
+ imgs:[['peppe-05','Pokój z balkonem'],['peppe-04','Pokój z balkonem'],['peppe-02','Pokój trzyosobowy'],['peppe-03','Pokój trzyosobowy'],['peppe-06','Salon z jadalnią dla gości'],['peppe-07','Salon dla gości'],['peppe-08','Kącik kawowy'],['peppe-09','Prywatna łazienka'],['peppe-10','Łazienka'],['peppe-01','Taras z widokiem na stare miasto'],['peppe-12','Widok na uliczkę starego miasta'],['peppe-11','Zabytkowa brama kamienicy']]},
+{id:'iwona',name:'App. Iwona',region:'Sycylia',city:'Palermo',where:'Palermo · Piazza della Vittoria, obok katedry',
+ cin:'IT082053C2KSACSU6J',
+ desc:'Elegancka zabytkowa rezydencja przy Piazza della Vittoria, z widokiem na katedrę i palmowy park Villa Bonanno. Do Quattro Canti dojdziesz w ok. 5 minut.',
+ tags:['do 8 osób, z dostawkami do 12','240 m² na dwóch poziomach','4 sypialnie','3 łazienki'],
+ units:[['Poziom dolny','2 sypialnie z widokiem na katedrę, 2 łazienki, duży salon z widokiem na park i w pełni wyposażona kuchnia'],['Poziom górny','sypialnia małżeńska z prywatną łazienką i widokiem na katedrę oraz jasna sypialnia z łóżkami pojedynczymi']],
+ equip:['Wi-Fi','klimatyzacja we wszystkich pomieszczeniach','ogrzewanie zimą','w pełni wyposażona kuchnia','TV','miejsce do pracy'],
+ info:[['Łóżka','2 łóżka małżeńskie (152 × 203 cm), 1 duże łóżko małżeńskie, 3 łóżka pojedyncze'],['Zameldowanie / wymeldowanie','15:00–24:00, samodzielne (skrytka na klucze) / do 11:00'],['Dobrze wiedzieć','Zabytkowa kamienica – do mieszkania prowadzą schody. Zwierzęta akceptowane. Parking na ulicy w pobliżu.']],
+ imgs:[['iwona-01','Widok z balkonu na katedrę i palmy'],['iwona-03','Salon'],['iwona-04','Salon'],['iwona-05','Kuchnia z jadalnią i widokiem na park'],['iwona-06','Kuchnia'],['iwona-07','Sypialnia'],['iwona-08','Sypialnia'],['iwona-09','Sypialnia na górnym poziomie'],['iwona-10','Sypialnia na górnym poziomie'],['iwona-11','Łazienka'],['iwona-12','Łazienka z prysznicem'],['iwona-13','Schody na górny poziom'],['iwona-14','Balkon z widokiem na park Villa Bonanno'],['iwona-02','Poranna kawa z widokiem na katedrę']]},
+{id:'seba1',name:'App. Seba 1',region:'Sycylia',city:'Avola',where:'Avola · via Giovanni Huss, 400 m od starego miasta, 500 m od morza',
+ cin:'IT089002C2IFIP2FLD',
+ desc:'Nowo urządzone mieszkanie na parterze (65 m²) z niezależnym wejściem, w spokojnej okolicy – kilka minut spacerem od zabytkowego centrum Avoli i od plaży Pantanello. Duża kuchnia z jadalnią, osobna sypialnia i słoneczny taras na piętrze.',
+ tags:['2–4 osoby','65 m²','parter, niezależne wejście','słoneczny taras','bezpłatny parking','zwierzęta na życzenie'],
+ equip:['Wi-Fi','klimatyzacja (ciepło / zimno) w sypialni i kuchni','telewizor','płyta grzewcza','piekarnik elektryczny','toster','czajnik','pralka','suszarka na pranie','deska i żelazko','łazienka z prysznicem i bidetem','suszarka do włosów','pościel','ręczniki','obrusy'],
+ info:[['Układ','Wejście, duża kuchnia z jadalnią (30 m²) z łóżkiem pojedynczym lub małżeńskim, sypialnia z oknem balkonowym, łazienka z prysznicem, kącik z pralką, słoneczny taras na piętrze.'],['Zameldowanie / wymeldowanie','15:00–20:00 / 8:00–10:00'],['Minimalny pobyt','5 nocy w okresie październik–maj.'],['Zasady','Zwierzęta akceptowane na życzenie. Bez imprez, w tym wieczorów kawalerskich i panieńskich.'],['W okolicy','Plaża Pantanello ok. 9 minut pieszo.']],
+ imgs:[['seba1-01','Kuchnia z jadalnią i łóżkiem'],['seba1-02','Kuchnia z jadalnią'],['seba1-03','Aneks kuchenny'],['seba1-04','Jadalnia'],['seba1-05','Łóżko w części kuchennej'],['seba1-06','Sypialnia'],['seba1-07','Sypialnia'],['seba1-08','Łazienka z prysznicem'],['seba1-09','Umywalka w łazience'],['seba1-10','Kącik z pralką'],['seba1-11','Korytarz'],['seba1-12','Słoneczny taras'],['seba1-13','Budynek']]},
+{id:'seba2',name:'App. Seba 2',region:'Sycylia',city:'Avola',where:'Avola · ok. 3 km od centrum, 1,5 km od plaży',
+ cin:'IT089002C23GA55GMW',
+ desc:'Przestronne mieszkanie (120 m²) na pierwszym piętrze willi z basenem i ogrodem. Trzy sypialnie, dwie kuchnie, dwie łazienki i taras ze stołem i kanapami – wygodne dla dwóch rodzin lub grupy znajomych.',
+ tags:['do 8 osób','120 m²','3 sypialnie','2 kuchnie','2 łazienki','basen','prywatny parking'],
+ equip:['Wi-Fi','klimatyzacja','2 aneksy kuchenne','piekarnik','ekspres do kawy','czajnik','toster','pralka','żelazko','telewizor','suszarka do włosów','pościel','ręczniki','obrusy','grill','solarium','leżaki przy basenie'],
+ info:[['Łóżka','Sypialnie z łóżkami małżeńskimi i pojedynczymi, w części kuchennej rozkładana sofa dwuosobowa.'],['Basen','Wspólny dla gości apartamentów w willi, czynny od połowy kwietnia do końca października.'],['Zameldowanie / wymeldowanie','13:00–22:00 / 8:00–10:00'],['Zasady','Zakaz palenia, bez zwierząt, bez imprez.'],['Parking','Bezpłatny prywatny parking na miejscu.'],['Dojazd','Lotnisko w Katanii ok. 80 km.']],
+ imgs:[['seba2-01','Basen z leżakami'],['seba2-02','Basen'],['seba2-03','Taras z kanapami'],['seba2-04','Taras ze stolikiem pod pergolą'],['seba2-05','Kuchnia z jadalnią'],['seba2-06','Kuchnia'],['seba2-07','Jadalnia z sofą'],['seba2-08','Część dzienna z rozkładaną sofą'],['seba2-09','Druga kuchnia'],['seba2-10','Sypialnia'],['seba2-11','Sypialnia'],['seba2-12','Sypialnia'],['seba2-13','Łazienka z prysznicem'],['seba2-14','Łazienka z pralką'],['seba2-15','Ogród z leżakami'],['zagara-05','Basen nocą']]}
+];
+const regions=[...new Set(APTS.map(a=>a.region))];
+const cities=[...new Set(APTS.map(a=>a.city))];
+document.getElementById('cities').innerHTML=cities.map(c=>'<span>'+c+'</span>').join('');
+let cur='all';
+const card=a=>{
+ const ph=a.imgs.length
+  ?'<button class="ph" data-g="'+a.id+'" aria-label="Zdjęcia: '+a.name+'"><img src="img/'+a.imgs[0][0]+'.jpg" alt="'+a.name+' – '+a.imgs[0][1]+'" loading="lazy"><span class="n">'+a.imgs.length+' zdjęć</span></button>'
+  :'<div class="ph"><b>'+a.name.replace('App. ','').slice(0,1)+'</b><span class="todo">foto da aggiungere</span></div>';
+ const tags=(a.tags||[]).map(t=>'<span>'+t+'</span>').join('')+(a.check||[]).map(t=>'<span class="todo">'+t+' – confermi?</span>').join('')+(a.todo||[]).map(t=>'<span class="todo">'+t+'</span>').join('');
+ const units=a.units?'<ul class="units">'+a.units.map(u=>'<li><b>'+u[0]+'</b> – '+u[1]+'</li>').join('')+'</ul>':'';
+ const more=(a.equip||a.info)?'<details class="more"><summary>Wyposażenie i informacje</summary>'+(a.equip?'<p class="eq"><b>W cenie:</b> '+a.equip.join(' · ')+'</p>':'')+(a.info||[]).map(x=>'<p><b>'+x[0]+':</b> '+x[1]+'</p>').join('')+'</details>':'';
+ return '<article class="apt"><div>'+ph+'</div><div class="in"><h3>'+a.name+'</h3><div class="where">'+a.where+'</div>'+(a.desc?'<p>'+a.desc+'</p>':'')+units+(tags?'<div class="tags">'+tags+'</div>':'')+more+
+ '<div class="foot"><span class="cin">'+(a.cin?'CIN: '+a.cin:'<span class="todo">CIN da inserire</span>')+'</span><a class="btn sm main" href="'+waLink('Dzień dobry! Interesuje mnie '+a.name+' ('+a.city+').')+'">Zapytaj o termin</a></div></div></article>';
+};
+const render=()=>{
+ const f=document.getElementById('filters');
+ f.innerHTML=regions.length>1?['all',...regions].map(r=>'<button aria-pressed="'+(cur===r)+'" data-r="'+r+'">'+(r==='all'?'Wszystkie':r)+'</button>').join(''):'';
+ document.getElementById('list').innerHTML=regions.filter(r=>cur==='all'||cur===r).map(r=>{
+  const list=APTS.filter(a=>a.region===r);
+  const cs=[...new Set(list.map(a=>a.city))].join(', ');
+  return '<div class="region"><h3>'+r+' <small>'+cs+'</small></h3><div class="grid">'+list.map(card).join('')+'</div></div>';
+ }).join('');
+};
+render();
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.r;render();});
+for(const a of document.querySelectorAll('a.wa'))a.href=waLink('Dzień dobry! Piszę ze strony Moya Rooms.');
+const lb=document.getElementById('lb'),li=document.getElementById('lbImg'),lc=document.getElementById('lbC');
+let g=null,i=0;
+const show=()=>{const im=g.imgs[i];li.src='img/'+im[0]+'.jpg';li.alt=g.name+' – '+im[1];lc.textContent=g.name+' · '+im[1]+' ('+(i+1)+'/'+g.imgs.length+')';};
+const open=id=>{g=APTS.find(a=>a.id===id);i=0;show();lb.classList.add('on');document.getElementById('lbX').focus();};
+const close=()=>lb.classList.remove('on');
+const step=d=>{i=(i+d+g.imgs.length)%g.imgs.length;show();};
+document.getElementById('list').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(b)open(b.dataset.g);});
+document.getElementById('lbX').onclick=close;
+document.getElementById('lbP').onclick=()=>step(-1);
+document.getElementById('lbN').onclick=()=>step(1);
+lb.addEventListener('click',e=>{if(e.target===lb)close();});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);});
+let x0=null;lb.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)step(dx<0?1:-1);x0=null;});
+const y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
+}
+</script>
+</body>
+</html>
