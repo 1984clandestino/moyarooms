@@ -6,7 +6,8 @@
 <title>Moya Rooms – Apartamenty we Włoszech</title>
 <meta name="description" content="Apartamenty na południu Włoch: Katania, Palermo i Avola. Kontakt i rezerwacja po polsku.">
 <link rel="canonical" href="https://moyarooms.com/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pl_PL">
 <meta property="og:site_name" content="Moya Rooms">
@@ -48,8 +49,9 @@ img{max-width:100%;display:block}
 .draft{background:var(--todo);color:var(--ink);text-align:center;font-size:14px;padding:8px 16px;border-bottom:1.5px dashed #c99a2e}
 header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px max(5vw,16px);max-width:1280px;margin:0 auto}
-.logo{font-family:Outfit,sans-serif;font-weight:600;font-size:22px;color:var(--brown);text-decoration:none}
-.logo span{color:var(--blue-ink)}
+.logo{font-family:Outfit,sans-serif;font-weight:600;font-size:22px;color:var(--brown);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.logo img{width:40px;height:40px;display:block}
+@media (max-width:440px){.logo{font-size:19px;gap:7px}.logo img{width:30px;height:30px}}
 .links{display:flex;gap:4px 18px;flex-wrap:wrap;align-items:center}
 .links a{color:var(--ink);text-decoration:none;font-size:15px;padding:8px 0}
 .links a:hover{color:var(--blue-ink)}
@@ -121,7 +123,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <header>
 <nav class="nav" aria-label="Menu główne">
-<a class="logo" href="#top">Moya <span>Rooms</span></a>
+<a class="logo" href="#top"><img src="img/logo-mark.png" alt="" width="40" height="40">Moya Rooms</a>
 <div class="links">
 <a href="#apartamenty">Apartamenty</a>
 <a href="#rezerwacja" class="hide-s">Jak zarezerwować</a>
