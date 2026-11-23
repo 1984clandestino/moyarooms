@@ -5,9 +5,13 @@
   "region": "Sycylia",
   "loc": "w Katanii",
   "h1": "Apartamenty w Katanii",
-  "title": "Apartamenty w Katanii – rezerwacja po polsku | Moya Rooms",
-  "description": "Apartamenty w Katanii na Sycylii: przy morzu w San Giovanni Li Cuti i w samym centrum, przy Piazza Duomo. Kontakt i rezerwacja po polsku.",
-  "intro": "Katania to drugie co do wielkości miasto Sycylii, położone u stóp Etny, z międzynarodowym lotniskiem Fontanarossa. Mamy tu dwa apartamenty: jeden tuż przy morzu, w rybackiej osadzie San Giovanni Li Cuti, drugi w samym centrum, kilka kroków od Piazza Duomo."
+  "title": "Apartamenty w Katanii – przy morzu i w centrum | Moya Rooms",
+  "description": "Apartamenty w Katanii na Sycylii: przy morzu w San Giovanni Li Cuti i w samym centrum, przy Piazza Duomo. Obsługa po polsku.",
+  "intro": "Katania to drugie co do wielkości miasto Sycylii, położone u stóp Etny, z międzynarodowym lotniskiem Fontanarossa. Mamy tu dwa apartamenty: jeden tuż przy morzu, w rybackiej osadzie San Giovanni Li Cuti, drugi w samym centrum, kilka kroków od Piazza Duomo.",
+  "car": {
+   "url": "https://moyatravel.com/wynajem-samochodu-katania/",
+   "text": "wynajem samochodu w Katanii"
+  }
  },
  {
   "slug": "palermo",
@@ -15,9 +19,13 @@
   "region": "Sycylia",
   "loc": "w Palermo",
   "h1": "Apartamenty w Palermo",
-  "title": "Apartamenty w Palermo – rezerwacja po polsku | Moya Rooms",
-  "description": "Apartament w Palermo przy Piazza della Vittoria, z widokiem na katedrę i park Villa Bonanno. Kontakt i rezerwacja po polsku.",
-  "intro": "Palermo, stolica Sycylii, słynie z zabytków, targów i ulicznego jedzenia. Nasz apartament mieści się w zabytkowej kamienicy przy Piazza della Vittoria, z widokiem na katedrę – do Quattro Canti dojdziesz w kilka minut."
+  "title": "Apartamenty w Palermo – przy katedrze | Moya Rooms",
+  "description": "Apartament w Palermo przy Piazza della Vittoria, z widokiem na katedrę i park Villa Bonanno. Obsługa po polsku.",
+  "intro": "Palermo, stolica Sycylii, słynie z zabytków, targów i ulicznego jedzenia. Nasz apartament mieści się w zabytkowej kamienicy przy Piazza della Vittoria, z widokiem na katedrę – do Quattro Canti dojdziesz w kilka minut.",
+  "car": {
+   "url": "https://moyatravel.com/wynajem-samochodu-palermo/",
+   "text": "wynajem samochodu w Palermo"
+  }
  },
  {
   "slug": "avola",
@@ -25,8 +33,12 @@
   "region": "Sycylia",
   "loc": "w Avoli",
   "h1": "Apartamenty w Avoli",
-  "title": "Apartamenty w Avoli – rezerwacja po polsku | Moya Rooms",
-  "description": "Apartamenty w Avoli na Sycylii: w centrum, blisko morza, oraz w willi z basenem. Kontakt i rezerwacja po polsku.",
-  "intro": "Avola leży na wschodnim wybrzeżu Sycylii, w prowincji Syrakuzy, kilka kilometrów od barokowego Noto. Znana jest z plaż i wina Nero d'Avola. Mamy tu dwa apartamenty: w centrum miasta, blisko morza, oraz w willi z basenem na obrzeżach."
+  "title": "Apartamenty w Avoli – w centrum i z basenem | Moya Rooms",
+  "description": "Apartamenty w Avoli na Sycylii: w centrum, blisko morza, oraz w willi z basenem. Obsługa po polsku.",
+  "intro": "Avola leży na wschodnim wybrzeżu Sycylii, w prowincji Syrakuzy, kilka kilometrów od barokowego Noto. Znana jest z plaż i wina Nero d'Avola. Mamy tu dwa apartamenty: w centrum miasta, blisko morza, oraz w willi z basenem na obrzeżach.",
+  "car": {
+   "url": "https://moyatravel.com/wynajem-samochodu-katania/",
+   "text": "wynajem samochodu w Katanii"
+  }
  }
 ]

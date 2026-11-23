@@ -13,6 +13,7 @@ WA = '393446501947'
 WA_SHOW = '+39 344 650 1947'
 MAIL = 'info@moyarooms.com'
 TODAY = datetime.date.today().isoformat()
+HOME_CAR = {'url': 'https://moyatravel.com/wynajem-samochodu-wlochy/', 'text': 'wynajem samochodu we Włoszech'}
 
 APTS = json.load(open(os.path.join(ROOT, 'data/apartamenty.json'), encoding='utf-8'))
 CITIES = json.load(open(os.path.join(ROOT, 'data/miasta.json'), encoding='utf-8'))
@@ -38,7 +39,7 @@ def plural_zdjec(n):
 WA_ICON = ('<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.3z"/></svg>')
 
 
-def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=None, gal=None, noindex=False, wa_text='Dzień dobry! Piszę ze strony Moya Rooms.'):
+def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=None, gal=None, noindex=False, wa_text='Dzień dobry! Piszę ze strony Moya Rooms.', car=None):
     canonical = SITE + path
     ld = ''
     if jsonld:
@@ -47,6 +48,17 @@ def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=Non
     if gal:
         galjs = '<script>window.GAL=' + json.dumps(gal, ensure_ascii=False) + ';</script>\n'
     robots = '<meta name="robots" content="noindex">\n' if noindex else ''
+    car = car or HOME_CAR
+    carband = f'''<section class="band carband">
+<div class="wrap">
+<div>
+<h2>Szukasz samochodu?</h2>
+<p>Auto na wakacje wynajmiesz u nas, w Moya Travel – po polsku i bez stresu. Sprawdź: <a href="{car['url']}">{e(car['text'])}</a>.</p>
+</div>
+<a class="btn main" href="{car['url']}">Bezpłatna wycena auta →</a>
+</div>
+</section>
+'''
     return f'''<!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -82,7 +94,7 @@ def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=Non
 
 <main id="top">
 {body}
-<section id="kontakt" class="contact band">
+{carband}<section id="kontakt" class="contact band">
 <div class="wrap">
 <div>
 <h2>Kontakt</h2>
@@ -222,7 +234,7 @@ def build_home():
 </section>
 '''
     return page(path='/', title='Moya Rooms – Apartamenty we Włoszech',
-                description='Apartamenty na południu Włoch: Katania, Palermo i Avola. Kontakt i rezerwacja po polsku.',
+                description='Apartamenty na południu Włoch: Katania, Palermo i Avola. Obsługa i rezerwacja po polsku.',
                 body=body)
 
 
@@ -251,7 +263,7 @@ def build_city(c):
 '''
     return page(path=f"/{c['slug']}/", title=c['title'], description=c['description'], body=body,
                 og_image=img(lst[0]['imgs'][0][0]), jsonld=ld,
-                wa_text=f"Dzień dobry! Interesują mnie apartamenty {c['loc']}.")
+                wa_text=f"Dzień dobry! Interesują mnie apartamenty {c['loc']}.", car=c.get('car'))
 
 
 # ---------- appartamento ----------
@@ -327,7 +339,7 @@ def build_apt(a):
         meta = meta[:155].rsplit(' ', 1)[0].rstrip(',.–- ') + '…'
     gal = [[img(nm), cap] for nm, cap in a['imgs']]
     return page(path=u, title=f"{a['h1']} | Moya Rooms", description=meta, body=body,
-                og_image=img(a['imgs'][0][0]), jsonld=ld, gal={'name': a['title'], 'imgs': gal}, wa_text=wa_t)
+                og_image=img(a['imgs'][0][0]), jsonld=ld, gal={'name': a['title'], 'imgs': gal}, wa_text=wa_t, car=c.get('car'))
 
 
 def build_404():

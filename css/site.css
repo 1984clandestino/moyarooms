@@ -134,3 +134,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .err{min-height:50vh;display:grid;place-items:center;text-align:center}
 @media(max-width:900px){.pbody{grid-template-columns:1fr}.box{position:static}}
 @media(max-width:700px){.gal{grid-template-columns:1fr;grid-template-rows:auto;aspect-ratio:4/3}.gal button:not(:first-child){display:none}.gal button:first-child{grid-row:auto}.eq{columns:1}}
+.carband{background:var(--sky)}
+.carband .wrap{display:flex;gap:18px 32px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.carband h2{font-size:clamp(22px,3vw,28px);margin-bottom:6px}
+.carband p{color:var(--soft);max-width:40em}
