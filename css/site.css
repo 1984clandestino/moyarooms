@@ -1,7 +1,7 @@
 :root{color-scheme:light dark;
 --bg:light-dark(#ffffff,#1f1610);--sand:light-dark(#EFE6D8,#2b2018);--card:light-dark(#ffffff,#2f241b);
 --ink:light-dark(#3b2a20,#f1e8db);--soft:light-dark(#6b5444,#cdbca8);--brown:light-dark(#8B5A3C,#d9a57f);
---blue:#1F8FB0;--blue-ink:light-dark(#176f89,#7cc8de);--line:light-dark(#e2d8c8,#4a3a2d);
+--blue:#187896;--blue-ink:light-dark(#176f89,#7cc8de);--line:light-dark(#e2d8c8,#4a3a2d);
 --sky:light-dark(#e8f3f7,#24363f);--todo:light-dark(#fff4d6,#4a3b16)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}

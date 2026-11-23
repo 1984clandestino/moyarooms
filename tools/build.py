@@ -20,6 +20,53 @@ CITIES = json.load(open(os.path.join(ROOT, 'data/miasta.json'), encoding='utf-8'
 CITY = {c['slug']: c for c in CITIES}
 
 e = lambda s: html.escape(str(s), quote=True)
+
+from PIL import Image
+WIDTHS = (480, 960, 1600)
+_DIM = {}
+
+
+def variants(name):
+    """Crea (se mancano) le versioni WebP 480/960/1600 px di img/<name>.jpg e restituisce srcset e dimensioni."""
+    src = os.path.join(ROOT, 'img', name + '.jpg')
+    if name not in _DIM:
+        im = Image.open(src)
+        _DIM[name] = im.size
+        os.makedirs(os.path.join(ROOT, 'img', 'w'), exist_ok=True)
+        for w in WIDTHS:
+            if w > im.width and w != WIDTHS[0]:
+                continue
+            out = os.path.join(ROOT, 'img', 'w', f'{name}-{w}.webp')
+            if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
+                v = im.convert('RGB')
+                if v.width > w:
+                    v = v.resize((w, round(v.height * w / v.width)), Image.LANCZOS)
+                v.save(out, 'WEBP', quality=78, method=6)
+    W, H = _DIM[name]
+    ws = [w for w in WIDTHS if w <= W] or [WIDTHS[0]]
+    srcset = ', '.join(f'/img/w/{name}-{w}.webp {min(w, W)}w' for w in ws)
+    return srcset, W, H
+
+
+def pic(name, alt, sizes, eager=False, extra=''):
+    srcset, W, H = variants(name)
+    load = ' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"'
+    return f'<img src="/img/{name}.jpg" srcset="{srcset}" sizes="{sizes}" alt="{e(alt)}" width="{W}" height="{H}"{load}{extra}>'
+
+
+_CSS = None
+
+
+def inline_css():
+    global _CSS
+    if _CSS is None:
+        fonts = open(os.path.join(ROOT, 'fonts/fonts.css'), encoding='utf-8').read().replace('url(./', 'url(/fonts/')
+        site = open(os.path.join(ROOT, 'css/site.css'), encoding='utf-8').read()
+        css = fonts + '\n' + site
+        css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+        css = re.sub(r'\s*\n\s*', '\n', css).strip()
+        _CSS = css
+    return _CSS
 url_of = lambda a: f"/{a['citySlug']}/{a['slug']}/"
 img = lambda name: f"/img/{name}.jpg"
 
@@ -76,8 +123,10 @@ def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=Non
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}{og_image}">
-<link rel="stylesheet" href="/fonts/fonts.css">
-<link rel="stylesheet" href="/css/site.css">
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+{inline_css()}
+</style>
 {ld}</head>
 <body>
 
@@ -160,7 +209,7 @@ def card(a, heading='h3'):
     city = CITY[a['citySlug']]
     wa_t = f"Dzień dobry! Interesuje mnie {a['title']} {city['loc']} ({a['name']}). {SITE}{u}"
     return f'''<article class="apt">
-<a class="ph" href="{u}"><img src="{img(first[0])}" alt="{e(a['title'])} {e(city['loc'])} – {e(first[1])}" loading="lazy" width="800" height="600"><span class="n">{n} {plural_zdjec(n)}</span></a>
+<a class="ph" href="{u}">{pic(first[0], a['title'] + ' ' + city['loc'] + ' – ' + first[1], '(max-width: 700px) 92vw, 380px')}<span class="n">{n} {plural_zdjec(n)}</span></a>
 <div class="in"><{heading}><a href="{u}">{e(a['title'])}</a></{heading}><div class="sub">{e(a['name'])}</div><div class="where">{e(a['where'])}</div>
 <p>{e(a.get('desc', ''))}</p>{units}{'<div class="tags">' + tags + '</div>' if tags else ''}
 <div class="foot"><span class="cin">{'CIN: ' + e(a['cin']) if a.get('cin') else ''}</span><span class="bts"><a class="btn sm" href="{u}">Szczegóły</a><a class="btn sm main" href="{e(wa(wa_t))}">Zapytaj o termin</a></span></div></div>
@@ -201,7 +250,7 @@ def build_home():
 </div>
 </div>
 <figure style="margin:0">
-<div class="arch"><img src="/img/hero.jpg" alt="Zachód słońca nad zatoczką San Giovanni Li Cuti w Katanii" width="1600" height="1200"></div>
+<div class="arch">{pic('hero', 'Zachód słońca nad zatoczką San Giovanni Li Cuti w Katanii', '(max-width: 820px) 92vw, 540px', eager=True)}</div>
 <figcaption>San Giovanni Li Cuti, Katania – kilka kroków od <a href="/katania/apartament-przy-morzu/">Apartamentu przy morzu</a></figcaption>
 </figure>
 </div>
@@ -275,9 +324,9 @@ def build_apt(a):
     gal_btns = []
     for i, (name, cap) in enumerate(a['imgs'][:5]):
         extra = f'<span class="all">Wszystkie zdjęcia ({n})</span>' if i == 0 else ''
-        load = '' if i == 0 else ' loading="lazy"'
-        gal_btns.append(f'<button data-i="{i}" aria-label="Otwórz zdjęcie: {e(cap)}"><img src="{img(name)}" alt="{e(a["title"])} {e(c["loc"])} – {e(cap)}"{load}>{extra}</button>')
-    thumbs = ''.join(f'<button data-i="{i}" aria-label="Otwórz zdjęcie: {e(cap)}"><img src="{img(name)}" alt="{e(cap)}" loading="lazy"></button>'
+        sizes = '(max-width: 700px) 92vw, 620px' if i == 0 else '(max-width: 700px) 1px, 300px'
+        gal_btns.append(f'<button data-i="{i}" aria-label="Otwórz zdjęcie: {e(cap)}">' + pic(name, a['title'] + ' ' + c['loc'] + ' – ' + cap, sizes, eager=(i == 0)) + f'{extra}</button>')
+    thumbs = ''.join(f'<button data-i="{i}" aria-label="Otwórz zdjęcie: {e(cap)}">' + pic(name, cap, '(max-width: 700px) 45vw, 200px') + '</button>'
                      for i, (name, cap) in enumerate(a['imgs']))
     tags = ''.join(f'<span>{e(t)}</span>' for t in a.get('tags', []))
     units = ''
