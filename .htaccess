@@ -12,9 +12,6 @@ RewriteRule ^seba\-1/?$ /avola/apartament-w-centrum/ [R=301,L]
 RewriteRule ^seba\-2/?$ /avola/apartament-z-basenem/ [R=301,L]
 # END link corti
 
-
-
-
 # File di lavoro non pubblici
 RewriteRule ^(data|tools)/ - [F,L]
 RewriteRule ^README\.md$ - [F,L]

@@ -21,6 +21,50 @@ CITY = {c['slug']: c for c in CITIES}
 
 e = lambda s: html.escape(str(s), quote=True)
 
+# Testi lunghi (zona, come arrivare, guida città) in data/teksty/*.md
+TEKSTY_NOTA = 'Ceny, rozkłady i godziny są orientacyjne – stan na listopad 2026.'
+
+
+def inline_md(s):
+    s = e(s)
+    s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s)
+    s = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', r'<a href="\2">\1</a>', s)
+    return s
+
+
+def md(text):
+    """Markdown minimo: ### titoli, paragrafi, elenchi puntati (anche annidati), **grassetto**, [link](url)."""
+    out = []
+    for block in re.split(r'\n\s*\n', text.strip()):
+        lines = block.split('\n')
+        if lines[0].startswith('### '):
+            out.append(f'<h3>{inline_md(lines[0][4:].strip())}</h3>')
+            lines = lines[1:]
+            if not lines:
+                continue
+        if lines[0].lstrip().startswith('- '):
+            html_list, depth = '', -1
+            for ln in lines:
+                d = (len(ln) - len(ln.lstrip(' '))) // 2
+                item = inline_md(ln.strip()[2:])
+                if d > depth:
+                    html_list += '<ul><li>' + item
+                elif d == depth:
+                    html_list += '</li><li>' + item
+                else:
+                    html_list += '</li></ul>' * (depth - d) + '</li><li>' + item
+                depth = d
+            html_list += '</li></ul>' * (depth + 1)
+            out.append(html_list)
+        else:
+            out.append('<p>' + inline_md(' '.join(l.strip() for l in lines)) + '</p>')
+    return '\n'.join(out)
+
+
+def tekst(kind, name):
+    p = os.path.join(ROOT, 'data', 'teksty', kind, name + '.md')
+    return open(p, encoding='utf-8').read() if os.path.exists(p) else ''
+
 from PIL import Image
 WIDTHS = (480, 960, 1600)
 _DIM = {}
@@ -310,6 +354,17 @@ def build_city(c):
 </div>
 </section>
 '''
+    guide = tekst('miasta', c['slug'])
+    if guide:
+        body += f'''
+<section class="band" style="background:var(--sand)" id="przewodnik">
+<div class="wrap"><div class="prose">
+<h2>{e(c['name'])}: dojazd, zwiedzanie i parkowanie</h2>
+{md(guide)}
+<p class="nota">{TEKSTY_NOTA}</p>
+</div></div>
+</section>
+'''
     return page(path=f"/{c['slug']}/", title=c['title'], description=c['description'], body=body,
                 og_image=img(lst[0]['imgs'][0][0]), jsonld=ld,
                 wa_text=f"Dzień dobry! Interesują mnie apartamenty {c['loc']}.", car=c.get('car'))
@@ -338,6 +393,9 @@ def build_apt(a):
     info = ''
     if a.get('info'):
         info = '<h2>Dobrze wiedzieć</h2><dl class="facts">' + ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in a['info']) + '</dl>'
+    okolica = tekst('apartamenty', a['id'])
+    if okolica:
+        info += f'<h2 id="okolica">Okolica i dojazd</h2><div class="prose">{md(okolica)}<p class="nota">{TEKSTY_NOTA}</p></div>'
     wa_t = f"Dzień dobry! Interesuje mnie {a['title']} {c['loc']} ({a['name']}). {SITE}{u}"
     others = [o for o in APTS if o['id'] != a['id'] and o['citySlug'] == a['citySlug']]
     others += [o for o in APTS if o['citySlug'] != a['citySlug']]
@@ -433,6 +491,7 @@ def main():
     ht = re.sub(r'# BEGIN link corti.*?# END link corti\n', '', ht, flags=re.S)
     ht = ht.replace('RewriteRule ^(.*)$ https://moyarooms.com/$1 [R=301,L]\n',
                     'RewriteRule ^(.*)$ https://moyarooms.com/$1 [R=301,L]\n\n' + short, 1)
+    ht = re.sub(r'\n{3,}', '\n\n', ht)
     if 'ErrorDocument 404' not in ht:
         ht += '\nErrorDocument 404 /404.html\n'
     open(ht_path, 'w', encoding='utf-8').write(ht)
