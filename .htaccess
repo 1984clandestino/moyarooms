@@ -12,8 +12,12 @@ RewriteRule ^seba\-1/?$ /avola/apartament-w-centrum/ [R=301,L]
 RewriteRule ^seba\-2/?$ /avola/apartament-z-basenem/ [R=301,L]
 # END link corti
 
+# Link corti per il modulo proprietari
+RewriteRule ^(aggiungi|modulo-proprietari)/?$ /modulo/?lang=it [R=302,L]
+RewriteRule ^(formularz|dodaj)/?$ /modulo/?lang=pl [R=302,L]
+
 # File di lavoro non pubblici
-RewriteRule ^(data|tools)/ - [F,L]
+RewriteRule ^(data|tools|_zgloszenia)/ - [F,L]
 RewriteRule ^README\.md$ - [F,L]
 
 # Cache per foto, font, stile e script

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moya Rooms – Pubblica il tuo alloggio / Dodaj swój obiekt</title>
+<meta name="description" content="Modulo per i proprietari: pubblica gratis il tuo alloggio su Moya Rooms, la vetrina per turisti polacchi in Italia.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Moya Rooms – Pubblica il tuo alloggio / Dodaj swój obiekt">
+<meta property="og:description" content="Turisti polacchi in Italia: pubblica gratis il tuo alloggio su Moya Rooms.">
+<meta property="og:image" content="https://moyarooms.com/img/hero.jpg">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+html[lang=it] .pl, html[lang=pl] .it{display:none!important}
+.fwrap{max-width:760px;margin:0 auto}
+.lang{display:flex;gap:6px}
+.lang button{min-height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--blue);background:transparent;color:var(--blue-ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--blue);color:#fff}
+.intro{font-size:17px;color:var(--soft);margin-top:12px}
+.steps{display:grid;gap:8px;margin:18px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;padding-left:34px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;display:grid;place-items:center}
+fieldset{border:1px solid var(--line);border-radius:14px;padding:18px clamp(14px,3vw,24px) 8px;margin:0 0 22px;background:var(--card)}
+legend{font-family:Outfit,sans-serif;font-weight:600;font-size:20px;color:var(--brown);padding:0 8px}
+.f{margin:0 0 16px}
+.f>label,.f>.lbl{display:block;font-weight:500;margin-bottom:6px}
+.req::after{content:" *";color:#b3261e}
+.hint{display:block;font-size:14px;color:var(--soft);margin:-2px 0 6px;font-weight:400}
+input[type=text],input[type=email],input[type=tel],input[type=number],input[type=url],select,textarea{width:100%;font:16px "DM Sans",sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(--blue) 40%,transparent);border-color:var(--blue)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.choices input{accent-color:var(--blue);width:18px;height:18px}
+.choices label:has(input:checked){border-color:var(--blue);background:var(--sky)}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px}
+.consent input{margin-top:4px;width:20px;height:20px;accent-color:var(--blue);flex:none}
+.drop{border:2px dashed var(--blue);border-radius:14px;padding:22px;text-align:center;background:var(--sky);cursor:pointer}
+.drop strong{display:block;font-size:17px}
+.thumbs2{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:12px}
+.thumbs2 div{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--sand)}
+.thumbs2 img{width:100%;height:100%;object-fit:cover}
+.thumbs2 button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+.thumbs2 span{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;border-radius:6px;padding:1px 6px}
+.count{margin-top:8px;font-size:14px;color:var(--soft)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.err{background:#fde8e6;color:#8c1d18;border-radius:10px;padding:10px 14px;margin:0 0 16px}
+.bar{height:12px;border-radius:6px;background:var(--sand);overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
+.done{text-align:center;padding:30px 0}
+.done h2{margin-bottom:12px}
+.mini{font-size:14px;color:var(--soft)}
+.tried :invalid{border-color:#b3261e!important}
+.tried .choices:has(input:invalid) label{border-color:#b3261e}
+</style>
+</head>
+<body>
+<header>
+<nav class="nav" aria-label="Moya Rooms">
+<a class="logo" href="/"><img src="/img/logo-mark.png" alt="" width="40" height="40">Moya Rooms</a>
+<div class="lang" role="group" aria-label="Lingua / Język">
+<button type="button" data-l="it" aria-pressed="true">Italiano</button>
+<button type="button" data-l="pl" aria-pressed="false">Polski</button>
+</div>
+</nav>
+</header>
+
+<main class="band">
+<div class="fwrap">
+
+<div id="formView">
+<h1><span class="it">Pubblica il tuo alloggio su Moya Rooms</span><span class="pl">Dodaj swój obiekt do Moya Rooms</span></h1>
+<p class="intro"><span class="it">Moya Rooms presenta case e appartamenti in Italia ai turisti polacchi, in lingua polacca. In questo periodo di prova la pubblicazione è <strong>gratuita</strong>.</span><span class="pl">Moya Rooms prezentuje domy i apartamenty we Włoszech turystom z Polski, w języku polskim. W okresie próbnym publikacja jest <strong>bezpłatna</strong>.</span></p>
+<ol class="steps">
+<li><span class="it">Compila il modulo e carica le foto (10–15 minuti).</span><span class="pl">Wypełnij formularz i prześlij zdjęcia (10–15 minut).</span></li>
+<li><span class="it">Creiamo noi la pagina in polacco, con il percorso dall'aeroporto e i consigli sulla zona.</span><span class="pl">Przygotujemy stronę po polsku, z dojazdem z lotniska i informacjami o okolicy.</span></li>
+<li><span class="it">Te la mandiamo da approvare: la pubblichiamo solo con il tuo ok.</span><span class="pl">Wyślemy Ci ją do akceptacji – opublikujemy ją dopiero po Twojej zgodzie.</span></li>
+</ol>
+<p class="mini" style="margin:14px 0 26px"><span class="it">I campi con * sono obbligatori.</span><span class="pl">Pola oznaczone * są obowiązkowe.</span></p>
+
+<form id="f" novalidate>
+<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<input type="hidden" name="lingua" id="lingua" value="it">
+
+<fieldset>
+<legend><span class="it">1. I tuoi contatti</span><span class="pl">1. Twoje dane kontaktowe</span></legend>
+<div class="f"><label class="req" for="nome"><span class="it">Nome e cognome</span><span class="pl">Imię i nazwisko</span></label><input type="text" id="nome" name="nome" required autocomplete="name"></div>
+<div class="two">
+<div class="f"><label class="req" for="telefono"><span class="it">Telefono (meglio con WhatsApp)</span><span class="pl">Telefon (najlepiej z WhatsAppem)</span></label><input type="tel" id="telefono" name="telefono" required autocomplete="tel"></div>
+<div class="f"><label class="req" for="email">E-mail</label><input type="email" id="email" name="email" required autocomplete="email"></div>
+</div>
+<div class="f"><span class="lbl req"><span class="it">Sei il proprietario o un gestore autorizzato?</span><span class="pl">Jesteś właścicielem czy upoważnionym zarządcą?</span></span>
+<div class="choices">
+<label><input type="radio" name="ruolo" value="Proprietario" required><span class="it">Proprietario</span><span class="pl">Właściciel</span></label>
+<label><input type="radio" name="ruolo" value="Gestore autorizzato"><span class="it">Gestore autorizzato</span><span class="pl">Upoważniony zarządca</span></label>
+</div></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">2. L'alloggio</span><span class="pl">2. Obiekt</span></legend>
+<div class="two">
+<div class="f"><label class="req" for="tipo"><span class="it">Tipo di alloggio</span><span class="pl">Rodzaj obiektu</span></label>
+<select id="tipo" name="tipo" required>
+<option value="" data-it="Scegli…" data-pl="Wybierz…"></option>
+<option value="Appartamento" data-it="Appartamento" data-pl="Apartament"></option>
+<option value="Casa" data-it="Casa" data-pl="Dom"></option>
+<option value="Villa" data-it="Villa" data-pl="Willa"></option>
+<option value="Stanza" data-it="Stanza" data-pl="Pokój"></option>
+<option value="B&amp;B" data-it="B&amp;B" data-pl="B&amp;B"></option>
+</select></div>
+<div class="f"><label class="req" for="regione"><span class="it">Regione</span><span class="pl">Region</span></label>
+<select id="regione" name="regione" required>
+<option value="" data-it="Scegli…" data-pl="Wybierz…"></option>
+<option value="Sicilia" data-it="Sicilia" data-pl="Sycylia"></option>
+<option value="Puglia" data-it="Puglia" data-pl="Apulia"></option>
+<option value="Calabria" data-it="Calabria" data-pl="Kalabria"></option>
+<option value="Campania" data-it="Campania" data-pl="Kampania"></option>
+<option value="Sardegna" data-it="Sardegna" data-pl="Sardynia"></option>
+<option value="Basilicata" data-it="Basilicata" data-pl="Bazylikata"></option>
+<option value="Lazio" data-it="Lazio" data-pl="Lacjum"></option>
+<option value="Toscana" data-it="Toscana" data-pl="Toskania"></option>
+<option value="Liguria" data-it="Liguria" data-pl="Liguria"></option>
+<option value="Marche" data-it="Marche" data-pl="Marche"></option>
+<option value="Abruzzo" data-it="Abruzzo" data-pl="Abruzja"></option>
+<option value="Molise" data-it="Molise" data-pl="Molise"></option>
+<option value="Umbria" data-it="Umbria" data-pl="Umbria"></option>
+<option value="Emilia-Romagna" data-it="Emilia-Romagna" data-pl="Emilia-Romania"></option>
+<option value="Veneto" data-it="Veneto" data-pl="Wenecja Euganejska"></option>
+<option value="Friuli-Venezia Giulia" data-it="Friuli-Venezia Giulia" data-pl="Friuli-Wenecja Julijska"></option>
+<option value="Trentino-Alto Adige" data-it="Trentino-Alto Adige" data-pl="Trydent-Górna Adyga"></option>
+<option value="Lombardia" data-it="Lombardia" data-pl="Lombardia"></option>
+<option value="Piemonte" data-it="Piemonte" data-pl="Piemont"></option>
+<option value="Valle d'Aosta" data-it="Valle d'Aosta" data-pl="Dolina Aosty"></option>
+</select></div>
+</div>
+<div class="f"><label class="req" for="localita"><span class="it">Comune e provincia</span><span class="pl">Miejscowość i prowincja</span></label><input type="text" id="localita" name="localita" required data-ph-it="es. Avola (SR)" data-ph-pl="np. Avola (SR)"></div>
+<div class="f"><label class="req" for="indirizzo"><span class="it">Indirizzo completo</span><span class="pl">Pełny adres</span></label>
+<span class="hint"><span class="it">Non verrà pubblicato: ci serve per calcolare distanze e collegamenti.</span><span class="pl">Nie zostanie opublikowany – potrzebujemy go do obliczenia odległości i dojazdu.</span></span>
+<input type="text" id="indirizzo" name="indirizzo" required autocomplete="street-address"></div>
+<div class="f"><label class="req" for="cin"><span class="it">Codice CIN</span><span class="pl">Kod CIN</span></label>
+<span class="hint"><span class="it">Senza CIN non possiamo pubblicare l'annuncio (obbligo di legge).</span><span class="pl">Bez kodu CIN nie możemy opublikować ogłoszenia (wymóg prawny).</span></span>
+<input type="text" id="cin" name="cin" required data-ph-it="es. IT089002C2XXXXXXXX" data-ph-pl="np. IT089002C2XXXXXXXX" style="text-transform:uppercase"></div>
+<div class="two">
+<div class="f"><label for="mq"><span class="it">Metri quadrati</span><span class="pl">Powierzchnia (m²)</span></label><input type="number" id="mq" name="mq" min="5" max="2000" inputmode="numeric"></div>
+<div class="f"><label class="req" for="bagni"><span class="it">Bagni</span><span class="pl">Łazienki</span></label><input type="number" id="bagni" name="bagni" min="0" max="20" required inputmode="numeric"></div>
+</div>
+<div class="f"><label class="req" for="ospiti"><span class="it">Quante persone al massimo? Ci sono letti aggiuntivi?</span><span class="pl">Ile osób maksymalnie? Czy są dostawki?</span></label><input type="text" id="ospiti" name="ospiti" required data-ph-it="es. 4 + 1 letto aggiuntivo" data-ph-pl="np. 4 + 1 dostawka"></div>
+<div class="f"><label class="req" for="letti"><span class="it">Camere e letti</span><span class="pl">Sypialnie i łóżka</span></label><textarea id="letti" name="letti" required data-ph-it="es. 2 camere: 1 matrimoniale, 2 singoli; divano letto in soggiorno" data-ph-pl="np. 2 sypialnie: 1 łóżko podwójne, 2 pojedyncze; rozkładana sofa w salonie"></textarea></div>
+<div class="f"><label class="req" for="piano"><span class="it">A che piano? C'è l'ascensore? Ci sono scale da fare?</span><span class="pl">Które piętro? Czy jest winda? Czy trzeba pokonać schody?</span></label><input type="text" id="piano" name="piano" required></div>
+<div class="f"><label class="req" for="descrizione"><span class="it">Descrivi l'alloggio con parole tue: cosa lo rende speciale?</span><span class="pl">Opisz obiekt własnymi słowami: co go wyróżnia?</span></label>
+<span class="hint"><span class="it">Il testo per il sito lo scriviamo noi, in polacco.</span><span class="pl">Tekst na stronę przygotujemy my.</span></span>
+<textarea id="descrizione" name="descrizione" required></textarea></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">3. Dotazioni</span><span class="pl">3. Wyposażenie</span></legend>
+<div class="f"><span class="lbl"><span class="it">Cosa c'è nell'alloggio?</span><span class="pl">Co jest w obiekcie?</span></span>
+<div class="choices" id="dot">
+<label><input type="checkbox" name="dotazioni[]" value="Wi-Fi">Wi-Fi</label>
+<label><input type="checkbox" name="dotazioni[]" value="Aria condizionata"><span class="it">Aria condizionata</span><span class="pl">Klimatyzacja</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Riscaldamento"><span class="it">Riscaldamento</span><span class="pl">Ogrzewanie</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Cucina completa"><span class="it">Cucina completa</span><span class="pl">W pełni wyposażona kuchnia</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Lavatrice"><span class="it">Lavatrice</span><span class="pl">Pralka</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Lavastoviglie"><span class="it">Lavastoviglie</span><span class="pl">Zmywarka</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="TV">TV</label>
+<label><input type="checkbox" name="dotazioni[]" value="Balcone o terrazza"><span class="it">Balcone o terrazza</span><span class="pl">Balkon lub taras</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Giardino"><span class="it">Giardino</span><span class="pl">Ogród</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Piscina" id="hasPool"><span class="it">Piscina</span><span class="pl">Basen</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Vista mare"><span class="it">Vista mare</span><span class="pl">Widok na morze</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Barbecue"><span class="it">Barbecue</span><span class="pl">Grill</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Parcheggio privato"><span class="it">Parcheggio privato</span><span class="pl">Prywatny parking</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Culla o seggiolone"><span class="it">Culla o seggiolone</span><span class="pl">Łóżeczko lub krzesełko dla dziecka</span></label>
+<label><input type="checkbox" name="dotazioni[]" value="Biancheria e asciugamani inclusi"><span class="it">Biancheria e asciugamani inclusi</span><span class="pl">Pościel i ręczniki w cenie</span></label>
+</div></div>
+<div class="f" id="poolBox" hidden><label class="req" for="piscina"><span class="it">In che mesi è aperta la piscina? È privata o in comune?</span><span class="pl">W jakich miesiącach basen jest czynny? Czy jest prywatny, czy wspólny?</span></label><input type="text" id="piscina" name="piscina"></div>
+<div class="f"><label for="dotazioni_altro"><span class="it">Altro</span><span class="pl">Inne</span></label><input type="text" id="dotazioni_altro" name="dotazioni_altro"></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">4. Regole e soggiorno</span><span class="pl">4. Zasady i pobyt</span></legend>
+<div class="two">
+<div class="f"><label class="req" for="checkin"><span class="it">Check-in (dalle… alle…)</span><span class="pl">Zameldowanie (od… do…)</span></label><input type="text" id="checkin" name="checkin" required data-ph-it="es. 15:00–20:00" data-ph-pl="np. 15:00–20:00"></div>
+<div class="f"><label class="req" for="checkout"><span class="it">Check-out (entro le…)</span><span class="pl">Wymeldowanie (do…)</span></label><input type="text" id="checkout" name="checkout" required data-ph-it="es. 10:00" data-ph-pl="np. 10:00"></div>
+</div>
+<div class="f"><label class="req" for="minimo"><span class="it">Quante notti minimo? Cambia in alta stagione?</span><span class="pl">Ile nocy minimum? Czy zmienia się w wysokim sezonie?</span></label><input type="text" id="minimo" name="minimo" required></div>
+<div class="f"><label class="req" for="apertura"><span class="it">In quali mesi accetti ospiti?</span><span class="pl">W jakich miesiącach przyjmujesz gości?</span></label><input type="text" id="apertura" name="apertura" required data-ph-it="es. tutto l'anno / da aprile a ottobre" data-ph-pl="np. cały rok / od kwietnia do października"></div>
+<div class="f"><span class="lbl req"><span class="it">Animali</span><span class="pl">Zwierzęta</span></span>
+<div class="choices">
+<label><input type="radio" name="animali" value="Sì" required><span class="it">Sì</span><span class="pl">Tak</span></label>
+<label><input type="radio" name="animali" value="No"><span class="it">No</span><span class="pl">Nie</span></label>
+<label><input type="radio" name="animali" value="Su richiesta"><span class="it">Su richiesta</span><span class="pl">Na zapytanie</span></label>
+</div></div>
+<div class="f"><label class="req" for="fumo_feste"><span class="it">Si può fumare? Sono ammesse feste?</span><span class="pl">Czy można palić? Czy imprezy są dozwolone?</span></label><input type="text" id="fumo_feste" name="fumo_feste" required></div>
+<div class="f"><label for="tassa"><span class="it">Tassa di soggiorno: quanto a persona a notte?</span><span class="pl">Opłata miejscowa: ile za osobę za noc?</span></label><input type="text" id="tassa" name="tassa"></div>
+<div class="f"><label for="prezzo"><span class="it">Prezzo indicativo a notte (bassa / alta stagione)</span><span class="pl">Orientacyjna cena za noc (niski / wysoki sezon)</span></label>
+<span class="hint"><span class="it">Solo per noi: non lo pubblichiamo senza il tuo ok.</span><span class="pl">Tylko dla nas – bez Twojej zgody jej nie publikujemy.</span></span>
+<input type="text" id="prezzo" name="prezzo"></div>
+<div class="f"><label for="lingue"><span class="it">Che lingue parli con gli ospiti?</span><span class="pl">W jakich językach rozmawiasz z gośćmi?</span></label><input type="text" id="lingue" name="lingue"></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">5. Zona e parcheggio</span><span class="pl">5. Okolica i parking</span></legend>
+<p class="hint" style="margin:0 0 14px"><span class="it">Aeroporto, autobus, treni, biglietti e ZTL li verifichiamo noi. Qui ci servono solo le cose che sai tu.</span><span class="pl">Dojazd z lotniska, autobusy, pociągi, bilety i strefy ZTL sprawdzamy sami. Tu potrzebujemy tylko tego, co wiesz Ty.</span></p>
+<div class="f"><span class="lbl req"><span class="it">Dove si parcheggia?</span><span class="pl">Gdzie można zaparkować?</span></span>
+<div class="choices">
+<label><input type="radio" name="parcheggio" value="Privato nella struttura" required><span class="it">Privato nella struttura</span><span class="pl">Prywatny na miejscu</span></label>
+<label><input type="radio" name="parcheggio" value="In strada gratis"><span class="it">In strada gratis</span><span class="pl">Bezpłatnie na ulicy</span></label>
+<label><input type="radio" name="parcheggio" value="A pagamento vicino"><span class="it">A pagamento vicino</span><span class="pl">Płatny w pobliżu</span></label>
+<label><input type="radio" name="parcheggio" value="Zona ZTL, serve il permesso"><span class="it">Zona ZTL, serve il permesso</span><span class="pl">Strefa ZTL, potrzebne zezwolenie</span></label>
+</div></div>
+<div class="f"><label for="vicino"><span class="it">Cosa c'è vicino (spiaggia, centro, negozi, ristoranti)? Se le sai, scrivi anche le distanze.</span><span class="pl">Co jest w pobliżu (plaża, centrum, sklepy, restauracje)? Jeśli wiesz, podaj też odległości.</span></label><textarea id="vicino" name="vicino"></textarea></div>
+<div class="f"><label for="consiglio"><span class="it">Un consiglio per gli ospiti: la fermata più comoda, dove mangiare, la spiaggia che preferisci</span><span class="pl">Rada dla gości: najwygodniejszy przystanek, gdzie zjeść, Twoja ulubiona plaża</span></label><textarea id="consiglio" name="consiglio"></textarea></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">6. Foto</span><span class="pl">6. Zdjęcia</span></legend>
+<p class="hint" style="margin:0 0 14px"><span class="it">Foto orizzontali, con luce del giorno e stanze in ordine. Almeno una foto per ogni stanza, più l'esterno e la vista. Niente collage, scritte o loghi.</span><span class="pl">Zdjęcia w poziomie, przy dziennym świetle, w uporządkowanych wnętrzach. Co najmniej jedno zdjęcie każdego pomieszczenia oraz budynek z zewnątrz i widok. Bez kolaży, napisów i logo.</span></p>
+<label class="drop" for="foto">
+<strong><span class="it">Tocca qui per scegliere le foto</span><span class="pl">Dotknij tutaj, aby wybrać zdjęcia</span></strong>
+<span class="mini"><span class="it">Da 8 a 25 foto. Puoi aggiungerne altre in più volte.</span><span class="pl">Od 8 do 25 zdjęć. Możesz dodawać je w kilku turach.</span></span>
+</label>
+<input type="file" id="foto" accept="image/*" multiple hidden>
+<div class="thumbs2" id="thumbs"></div>
+<div class="count" id="count"></div>
+<div class="f" style="margin-top:16px"><label for="copertina"><span class="it">Quale foto vuoi come prima? (facoltativo)</span><span class="pl">Które zdjęcie ma być główne? (opcjonalnie)</span></label><input type="text" id="copertina" name="copertina" data-ph-it="es. la n. 3, la terrazza" data-ph-pl="np. nr 3, taras"></div>
+<div class="f"><label for="video"><span class="it">Link a un video o tour virtuale (facoltativo)</span><span class="pl">Link do filmu lub wirtualnego spaceru (opcjonalnie)</span></label><input type="url" id="video" name="video" inputmode="url"></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">7. Contatto per i turisti e consensi</span><span class="pl">7. Kontakt dla turystów i zgody</span></legend>
+<div class="f"><label class="req" for="wa_turisti"><span class="it">Su quale numero WhatsApp vuoi ricevere le richieste dei turisti?</span><span class="pl">Na jaki numer WhatsApp chcesz otrzymywać zapytania od turystów?</span></label><input type="tel" id="wa_turisti" name="wa_turisti" required></div>
+<label class="consent"><input type="checkbox" name="consensi[]" value="Dati veri" required><span><span class="it">Dichiaro di essere il proprietario o un gestore autorizzato e che i dati inseriti sono corretti. *</span><span class="pl">Oświadczam, że jestem właścicielem lub upoważnionym zarządcą, a podane dane są prawdziwe. *</span></span></label>
+<label class="consent"><input type="checkbox" name="consensi[]" value="Diritti sulle foto e pubblicazione" required><span><span class="it">Dichiaro di avere i diritti sulle foto e autorizzo la pubblicazione su moyarooms.com e sui profili social di Moya Rooms. *</span><span class="pl">Oświadczam, że mam prawa do zdjęć, i zgadzam się na ich publikację na moyarooms.com oraz w profilach społecznościowych Moya Rooms. *</span></span></label>
+<label class="consent"><input type="checkbox" name="consensi[]" value="Prova gratuita" required><span><span class="it">So che la pubblicazione è gratuita nel periodo di prova, senza rinnovo automatico, e che posso chiedere in ogni momento di togliere l'annuncio. *</span><span class="pl">Wiem, że w okresie próbnym publikacja jest bezpłatna, bez automatycznego przedłużenia, i że w każdej chwili mogę poprosić o usunięcie ogłoszenia. *</span></span></label>
+<label class="consent"><input type="checkbox" name="consensi[]" value="Informativa privacy letta" required><span><span class="it">Ho letto l'<a href="/modulo/informativa.html" target="_blank">informativa sulla privacy</a>. *</span><span class="pl">Zapoznałem(-am) się z <a href="/modulo/informativa.html" target="_blank">informacją o ochronie danych</a>. *</span></span></label>
+</fieldset>
+
+<div id="msg" class="err" hidden></div>
+<div id="prog" hidden><div class="bar"><i id="barI"></i></div><p class="mini" id="progT"></p></div>
+<button type="submit" class="btn main" id="sendBtn" style="width:100%;min-height:52px;font-size:17px"><span class="it">Invia il modulo</span><span class="pl">Wyślij formularz</span></button>
+</form>
+</div>
+
+<div id="doneView" class="done" hidden>
+<h2><span class="it">Grazie, abbiamo ricevuto tutto!</span><span class="pl">Dziękujemy, wszystko dotarło!</span></h2>
+<p><span class="it">Prepariamo la pagina del tuo alloggio e te la mandiamo da approvare entro 48 ore.</span><span class="pl">Przygotujemy stronę Twojego obiektu i wyślemy Ci ją do akceptacji w ciągu 48 godzin.</span></p>
+<p style="margin-top:18px"><a class="btn" href="/"><span class="it">Guarda Moya Rooms</span><span class="pl">Zobacz Moya Rooms</span></a></p>
+</div>
+
+</div>
+</main>
+
+<footer class="band" style="padding-block:24px">
+<div class="wrap mini">Moya Rooms · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria · <a href="mailto:info@moyarooms.com">info@moyarooms.com</a> · <a href="/modulo/informativa.html">Privacy</a></div>
+</footer>
+
+<script src="/modulo/modulo.js"></script>
+</body>
+</html>
