@@ -372,7 +372,7 @@ def plural_apt(n):
     return 'apartamentów'
 
 
-def build_home_v2():
+def build_home_v2(path='/', noindex=False):
     regions = []
     for a in APTS:
         if a['region'] not in regions:
@@ -451,8 +451,9 @@ def build_home_v2():
     home = build_home()
     owners = home[home.index('<section id="dla-wlascicieli"'):home.index('<section id="wycieczki"')]
     body += owners + '<script src="/js/home2.js" defer></script>\n'
-    return page(path='/anteprima/', title='Moya Rooms – Apartamenty na południu Włoch',
-                description='Apartamenty na południu Włoch z obsługą po polsku.', body=body, noindex=True)
+    return page(path=path, title='Moya Rooms – Apartamenty we Włoszech',
+                description='Apartamenty na południu Włoch: Katania, Palermo i Avola. Obsługa i rezerwacja po polsku.',
+                body=body, noindex=noindex)
 
 
 # ---------- città ----------
@@ -593,8 +594,8 @@ def write(rel, content):
 
 
 def main():
-    write('index.html', build_home())
-    write('anteprima/index.html', build_home_v2())
+    write('index.html', build_home_v2())
+    write('anteprima/index.html', build_home_v2('/anteprima/', noindex=True))
     urls = ['/']
     for c in CITIES:
         write(f"{c['slug']}/index.html", build_city(c))
