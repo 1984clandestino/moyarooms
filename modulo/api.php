@@ -4,9 +4,12 @@
  * Riceve le risposte e le foto, le salva in _zgloszenia/ (non accessibile dal web)
  * e invia un'email a info@moyarooms.com con risposte, foto in allegato e link allo ZIP.
  *
- * Azioni (POST): start, photo, finish.  Azioni (GET): zip, ping.
+ * Azioni (POST): start, photo, finish.  Azioni (GET): zip, ping, csv.
+ * csv = elenco di tutti i moduli per il foglio Google «Proprietari case vacanze» (IMPORTDATA).
+ * La chiave dell'elenco sta solo nella formula del foglio: qui c'è soltanto la sua impronta SHA-256.
  */
 declare(strict_types=1);
+date_default_timezone_set('Europe/Rome');
 
 const TO_EMAIL   = 'info@moyarooms.com';
 const FROM_EMAIL = 'info@moyarooms.com';
@@ -16,6 +19,7 @@ const MAX_PHOTO_BYTES = 12 * 1024 * 1024;   // 12 MB per foto (il browser le rid
 const MAX_ATTACH_BYTES = 15 * 1024 * 1024;  // oltre questo, nell'email solo il link allo ZIP
 const MIN_FILL_SECONDS = 20;
 const MAX_STARTS_PER_HOUR_PER_IP = 6;
+const LIST_KEY_HASH = '676f50bafee716dc5d8f4e53b68a8e003e67c0a26b027cdffe48573598af498b';
 
 $STORE = dirname(__DIR__) . '/_zgloszenia';
 
@@ -72,7 +76,7 @@ if ($action === 'ping') {
          'mail' => function_exists('mail'), 'zip' => class_exists('ZipArchive'), 'gd' => function_exists('getimagesize')]);
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $action !== 'zip') out(['ok' => false, 'error' => 'method'], 405);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $action !== 'zip' && $action !== 'csv') out(['ok' => false, 'error' => 'method'], 405);
 if (!is_dir($STORE) && !@mkdir($STORE, 0750, true)) out(['ok' => false, 'error' => 'storage'], 500);
 
 // ---------- 1. start: salva le risposte ----------
@@ -169,7 +173,7 @@ if ($action === 'finish') {
 if ($action === 'zip') {
     $id = (string)($_GET['id'] ?? '');
     $dir = sub_dir($STORE, $id);
-    check_token($dir, (string)($_GET['k'] ?? ''));
+    if (!is_master((string)($_GET['mk'] ?? ''))) check_token($dir, (string)($_GET['k'] ?? ''));
     if (!class_exists('ZipArchive')) out(['ok' => false, 'error' => 'no_zip'], 500);
     $tmp = tempnam(sys_get_temp_dir(), 'mr');
     $z = new ZipArchive();
@@ -185,7 +189,51 @@ if ($action === 'zip') {
     exit;
 }
 
+// ---------- 5. csv: elenco per il foglio Google (chiave dell'elenco) ----------
+if ($action === 'csv') {
+    if (!is_master((string)($_GET['mk'] ?? ''))) out(['ok' => false, 'error' => 'bad_token'], 403);
+    $cols = [
+        'Data' => null, 'Codice' => null, 'Lingua modulo' => 'lingua', 'Nome e cognome' => 'nome', 'Telefono' => 'telefono',
+        'E-mail' => 'email', 'Ruolo' => 'ruolo', 'Contatto preferito' => 'contatto_pref', 'Tipo di alloggio' => 'tipo',
+        'Regione' => 'regione', 'Località' => 'localita', 'Indirizzo (non pubblico)' => 'indirizzo', 'CIN' => 'cin',
+        'Ospiti' => 'ospiti', 'Camere e letti' => 'letti', 'Bagni' => 'bagni', 'Notti min. bassa stagione' => 'min_bassa',
+        'Notti min. alta stagione' => 'min_alta', 'Alta stagione' => 'alta_periodo',
+        'Prezzi a notte (tassa di soggiorno inclusa)' => 'prezzi', 'Altre informazioni sui prezzi' => 'prezzi_note',
+        'Altri annunci' => 'link_annunci', 'Foto ricevute' => null, 'Foto (ZIP)' => null, 'Modulo completo' => null,
+    ];
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Cache-Control: no-store');
+    $f = fopen('php://output', 'w');
+    fputcsv($f, array_keys($cols), ',', '"', '');
+    $dirs = glob($STORE . '/*', GLOB_ONLYDIR) ?: [];
+    sort($dirs);
+    foreach ($dirs as $d) {
+        $id = basename($d);
+        $a = json_decode((string)@file_get_contents($d . '/risposte.json'), true);
+        $m = json_decode((string)@file_get_contents($d . '/meta.json'), true);
+        if (!is_array($a) || !is_array($m)) continue;
+        $row = [];
+        foreach ($cols as $label => $key) {
+            if ($label === 'Data') { $t = strtotime((string)($m['created'] ?? '')); $row[] = $t ? date('d/m/Y H:i', $t) : ''; continue; }
+            if ($label === 'Codice') { $row[] = $id; continue; }
+            if ($label === 'Foto ricevute') { $row[] = (string)count(glob($d . '/foto/*') ?: []); continue; }
+            if ($label === 'Foto (ZIP)') { $row[] = SITE . '/modulo/api.php?action=zip&id=' . rawurlencode($id) . '&mk=' . rawurlencode((string)$_GET['mk']); continue; }
+            if ($label === 'Modulo completo') { $row[] = !empty($m['done']) ? 'sì' : 'no'; continue; }
+            $v = str_replace(["\r\n", "\n", "\r"], ' | ', (string)($a[$key] ?? ''));
+            if ($key === 'telefono' && preg_match('/^\d{6,}$/', $v)) $v = substr($v, 0, 3) . ' ' . substr($v, 3); // resta testo nel foglio
+            $row[] = $v;
+        }
+        fputcsv($f, $row, ',', '"', '');
+    }
+    fclose($f);
+    exit;
+}
+
 out(['ok' => false, 'error' => 'action'], 400);
+
+function is_master(string $mk): bool {
+    return $mk !== '' && hash_equals(LIST_KEY_HASH, hash('sha256', $mk));
+}
 
 function send_mail(string $to, string $subject, string $text, array $files, string $replyTo): bool {
     $b = 'mr' . bin2hex(random_bytes(8));
