@@ -46,6 +46,11 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 .thumbs2 img{width:100%;height:100%;object-fit:cover}
 .thumbs2 button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:18px;line-height:1;cursor:pointer}
 .thumbs2 span{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;border-radius:6px;padding:1px 6px}
+.ptab{display:grid;grid-template-columns:minmax(92px,1.2fr) 1fr 1fr;gap:8px 10px;align-items:center}
+.ptab .pt-h{font-size:13px;font-weight:500;color:var(--soft);text-align:center}
+.ptab .pt-r{font-size:15px;font-weight:500;line-height:1.25}
+.ptab input{text-align:center;padding:10px 6px}
+.pnote{margin:0 0 12px;padding:10px 14px;border-left:4px solid var(--blue);background:var(--sky);border-radius:0 10px 10px 0;font-size:15px;line-height:1.45}
 .count{margin-top:8px;font-size:14px;color:var(--soft)}
 .count.bad{color:#8c1d18;font-weight:500}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -187,7 +192,6 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="f"><label class="req" for="checkin"><span class="it">Check-in (dalle… alle…)</span><span class="pl">Zameldowanie (od… do…)</span></label><input type="text" id="checkin" name="checkin" required data-ph-it="es. 15:00–20:00" data-ph-pl="np. 15:00–20:00"></div>
 <div class="f"><label class="req" for="checkout"><span class="it">Check-out (entro le…)</span><span class="pl">Wymeldowanie (do…)</span></label><input type="text" id="checkout" name="checkout" required data-ph-it="es. 10:00" data-ph-pl="np. 10:00"></div>
 </div>
-<div class="f"><label class="req" for="minimo"><span class="it">Quante notti minimo? Cambia in alta stagione?</span><span class="pl">Ile nocy minimum? Czy zmienia się w wysokim sezonie?</span></label><input type="text" id="minimo" name="minimo" required></div>
 <div class="f"><label class="req" for="apertura"><span class="it">In quali mesi accetti ospiti?</span><span class="pl">W jakich miesiącach przyjmujesz gości?</span></label><input type="text" id="apertura" name="apertura" required data-ph-it="es. tutto l'anno / da aprile a ottobre" data-ph-pl="np. cały rok / od kwietnia do października"></div>
 <div class="f"><span class="lbl req"><span class="it">Animali</span><span class="pl">Zwierzęta</span></span>
 <div class="choices">
@@ -196,15 +200,33 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <label><input type="radio" name="animali" value="Su richiesta"><span class="it">Su richiesta</span><span class="pl">Na zapytanie</span></label>
 </div></div>
 <div class="f"><label class="req" for="fumo_feste"><span class="it">Si può fumare? Sono ammesse feste?</span><span class="pl">Czy można palić? Czy imprezy są dozwolone?</span></label><input type="text" id="fumo_feste" name="fumo_feste" required></div>
-<div class="f"><label for="tassa"><span class="it">Tassa di soggiorno: quanto a persona a notte?</span><span class="pl">Opłata miejscowa: ile za osobę za noc?</span></label><input type="text" id="tassa" name="tassa"></div>
-<div class="f"><label for="prezzo"><span class="it">Prezzo indicativo a notte (bassa / alta stagione)</span><span class="pl">Orientacyjna cena za noc (niski / wysoki sezon)</span></label>
-<span class="hint"><span class="it">Solo per noi: non lo pubblichiamo senza il tuo ok.</span><span class="pl">Tylko dla nas – bez Twojej zgody jej nie publikujemy.</span></span>
-<input type="text" id="prezzo" name="prezzo"></div>
 <div class="f"><label for="lingue"><span class="it">Che lingue parli con gli ospiti?</span><span class="pl">W jakich językach rozmawiasz z gośćmi?</span></label><input type="text" id="lingue" name="lingue"></div>
 </fieldset>
 
 <fieldset>
-<legend><span class="it">5. Zona e parcheggio</span><span class="pl">5. Okolica i parking</span></legend>
+<legend><span class="it">5. Prezzi</span><span class="pl">5. Ceny</span></legend>
+<p class="hint" style="margin:0 0 14px"><span class="it">Ci servono per preparare i preventivi per i turisti. Sul sito non pubblichiamo i prezzi senza il tuo consenso.</span><span class="pl">Potrzebujemy ich do przygotowania wycen dla turystów. Bez Twojej zgody nie publikujemy cen na stronie.</span></p>
+<div class="two">
+<div class="f"><label class="req" for="min_bassa"><span class="it">Notti minime – bassa stagione</span><span class="pl">Minimum nocy – niski sezon</span></label><select id="min_bassa" name="min_bassa" required><option value="" data-it="Scegli" data-pl="Wybierz"></option><option value="1" data-it="1 notte" data-pl="1 noc"></option><option value="2" data-it="2 notti" data-pl="2 noce"></option><option value="3" data-it="3 notti" data-pl="3 noce"></option><option value="4" data-it="4 notti" data-pl="4 noce"></option><option value="5" data-it="5 notti" data-pl="5 nocy"></option><option value="6" data-it="6 notti" data-pl="6 nocy"></option><option value="7" data-it="7 notti" data-pl="7 nocy"></option></select></div>
+<div class="f"><label for="min_alta"><span class="it">Notti minime – alta stagione</span><span class="pl">Minimum nocy – wysoki sezon</span></label><select id="min_alta" name="min_alta"><option value="Come in bassa stagione" data-it="Come in bassa stagione" data-pl="Tak samo jak w niskim sezonie"></option><option value="1" data-it="1 notte" data-pl="1 noc"></option><option value="2" data-it="2 notti" data-pl="2 noce"></option><option value="3" data-it="3 notti" data-pl="3 noce"></option><option value="4" data-it="4 notti" data-pl="4 noce"></option><option value="5" data-it="5 notti" data-pl="5 nocy"></option><option value="6" data-it="6 notti" data-pl="6 nocy"></option><option value="7" data-it="7 notti" data-pl="7 nocy"></option></select></div>
+</div>
+<div class="f"><label for="alta_periodo"><span class="it">Quando è l'alta stagione?</span><span class="pl">Kiedy jest wysoki sezon?</span></label><input type="text" id="alta_periodo" name="alta_periodo" data-ph-it="es. luglio e agosto, Pasqua" data-ph-pl="np. lipiec i sierpień, Wielkanoc"></div>
+<div class="f"><span class="lbl req"><span class="it">Prezzo a notte per tutto l'alloggio (€)</span><span class="pl">Cena za noc za cały obiekt (€)</span></span>
+<p class="pnote"><span class="it"><strong>Tassa di soggiorno inclusa.</strong> Il prezzo che indichi deve già comprenderla: al turista comunichiamo un unico prezzo finale, senza costi da pagare a parte all'arrivo.</span><span class="pl"><strong>Opłata miejscowa (tassa di soggiorno) wliczona w cenę.</strong> Podana przez Ciebie cena musi ją już zawierać: turyście podajemy jedną cenę końcową, bez dodatkowych opłat na miejscu.</span></p>
+<div class="ptab" id="ptab">
+<span></span><span class="pt-h"><span class="it">Bassa stagione</span><span class="pl">Niski sezon</span></span><span class="pt-h"><span class="it">Alta stagione</span><span class="pl">Wysoki sezon</span></span>
+<span class="pt-r"><span class="it">1–2 persone</span><span class="pl">1–2 osoby</span></span><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="1–2 persone" data-c="bassa" data-al-it="1–2 persone, bassa stagione" data-al-pl="1–2 osoby, niski sezon" id="p1bassa"><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="1–2 persone" data-c="alta" data-al-it="1–2 persone, alta stagione" data-al-pl="1–2 osoby, wysoki sezon" id="p1alta"><span class="pt-r"><span class="it">3 persone</span><span class="pl">3 osoby</span></span><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="3 persone" data-c="bassa" data-al-it="3 persone, bassa stagione" data-al-pl="3 osoby, niski sezon"><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="3 persone" data-c="alta" data-al-it="3 persone, alta stagione" data-al-pl="3 osoby, wysoki sezon"><span class="pt-r"><span class="it">4 persone</span><span class="pl">4 osoby</span></span><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="4 persone" data-c="bassa" data-al-it="4 persone, bassa stagione" data-al-pl="4 osoby, niski sezon"><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="4 persone" data-c="alta" data-al-it="4 persone, alta stagione" data-al-pl="4 osoby, wysoki sezon"><span class="pt-r"><span class="it">Ogni persona in più</span><span class="pl">Każda dodatkowa osoba</span></span><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="Ogni persona in più" data-c="bassa" data-al-it="Ogni persona in più, bassa stagione" data-al-pl="Każda dodatkowa osoba, niski sezon"><input type="number" inputmode="numeric" min="0" step="1" placeholder="€" data-r="Ogni persona in più" data-c="alta" data-al-it="Ogni persona in più, alta stagione" data-al-pl="Każda dodatkowa osoba, wysoki sezon">
+</div>
+<span class="hint" style="margin:8px 0 0"><span class="it">Compila almeno la prima riga. Lascia vuote le righe che non ti servono.</span><span class="pl">Uzupełnij co najmniej pierwszy wiersz. Wiersze, które Cię nie dotyczą, zostaw puste.</span></span>
+<input type="hidden" name="prezzi" id="prezzi">
+</div>
+<div class="f"><label for="prezzi_note"><span class="it">Altre informazioni sui prezzi (facoltativo)</span><span class="pl">Inne informacje o cenach (opcjonalnie)</span></label>
+<span class="hint"><span class="it">Se c'è qualcosa che non ti abbiamo chiesto – sconti per soggiorni lunghi, servizi extra, condizioni particolari – scrivilo qui.</span><span class="pl">Jeśli czegoś nie zapytaliśmy – rabaty za dłuższe pobyty, dodatkowe usługi, szczególne warunki – napisz to tutaj.</span></span>
+<textarea id="prezzi_note" name="prezzi_note"></textarea></div>
+</fieldset>
+
+<fieldset>
+<legend><span class="it">6. Zona e parcheggio</span><span class="pl">6. Okolica i parking</span></legend>
 <p class="hint" style="margin:0 0 14px"><span class="it">Aeroporto, autobus, treni, biglietti e ZTL li verifichiamo noi. Qui ci servono solo le cose che sai tu.</span><span class="pl">Dojazd z lotniska, autobusy, pociągi, bilety i strefy ZTL sprawdzamy sami. Tu potrzebujemy tylko tego, co wiesz Ty.</span></p>
 <div class="f"><span class="lbl req"><span class="it">Dove si parcheggia?</span><span class="pl">Gdzie można zaparkować?</span></span>
 <div class="choices">
@@ -218,7 +240,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 </fieldset>
 
 <fieldset>
-<legend><span class="it">6. Foto</span><span class="pl">6. Zdjęcia</span></legend>
+<legend><span class="it">7. Foto</span><span class="pl">7. Zdjęcia</span></legend>
 <p class="hint" style="margin:0 0 14px"><span class="it">Foto orizzontali, con luce del giorno e stanze in ordine. Almeno una foto per ogni stanza, più l'esterno e la vista. Niente collage, scritte o loghi.</span><span class="pl">Zdjęcia w poziomie, przy dziennym świetle, w uporządkowanych wnętrzach. Co najmniej jedno zdjęcie każdego pomieszczenia oraz budynek z zewnątrz i widok. Bez kolaży, napisów i logo.</span></p>
 <label class="drop" for="foto">
 <strong><span class="it">Tocca qui per scegliere le foto</span><span class="pl">Dotknij tutaj, aby wybrać zdjęcia</span></strong>
@@ -232,7 +254,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 </fieldset>
 
 <fieldset>
-<legend><span class="it">7. Contatto per i turisti e consensi</span><span class="pl">7. Kontakt dla turystów i zgody</span></legend>
+<legend><span class="it">8. Contatto per i turisti e consensi</span><span class="pl">8. Kontakt dla turystów i zgody</span></legend>
 <div class="f"><label class="req" for="wa_turisti"><span class="it">Su quale numero WhatsApp vuoi ricevere le richieste dei turisti?</span><span class="pl">Na jaki numer WhatsApp chcesz otrzymywać zapytania od turystów?</span></label><input type="tel" id="wa_turisti" name="wa_turisti" required></div>
 <label class="consent"><input type="checkbox" name="consensi[]" value="Dati veri" required><span><span class="it">Dichiaro di essere il proprietario o un gestore autorizzato e che i dati inseriti sono corretti. *</span><span class="pl">Oświadczam, że jestem właścicielem lub upoważnionym zarządcą, a podane dane są prawdziwe. *</span></span></label>
 <label class="consent"><input type="checkbox" name="consensi[]" value="Diritti sulle foto e pubblicazione" required><span><span class="it">Dichiaro di avere i diritti sulle foto e autorizzo la pubblicazione su moyarooms.com e sui profili social di Moya Rooms. *</span><span class="pl">Oświadczam, że mam prawa do zdjęć, i zgadzam się na ich publikację na moyarooms.com oraz w profilach społecznościowych Moya Rooms. *</span></span></label>
@@ -259,6 +281,6 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="wrap mini">Moya Rooms · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria · <a href="mailto:info@moyarooms.com">info@moyarooms.com</a> · <a href="/modulo/informativa.html">Privacy</a></div>
 </footer>
 
-<script src="/modulo/modulo.js?v=2"></script>
+<script src="/modulo/modulo.js?v=4"></script>
 </body>
 </html>

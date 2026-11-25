@@ -12,11 +12,11 @@
     it: { min: n => `Servono almeno ${MIN} foto (ora ${n}).`, max: `Massimo ${MAX} foto.`, req: n => n === 1 ? 'Manca 1 risposta obbligatoria: è evidenziata in rosso.' : `Mancano ${n} risposte obbligatorie: sono evidenziate in rosso.`,
           pool: 'Scrivi i mesi di apertura della piscina.', sending: 'Invio delle risposte…', up: (i, n) => `Carico la foto ${i} di ${n}…`,
           fin: 'Ultimo passo…', fail: 'Qualcosa non ha funzionato. Riprova tra poco oppure scrivici a info@moyarooms.com.',
-          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => n < MIN ? `${n} foto scelte (ne servono almeno ${MIN})` : `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.' },
+          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => n < MIN ? `${n} foto scelte (ne servono almeno ${MIN})` : `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.', price: 'Scrivi almeno il prezzo per 1–2 persone.' },
     pl: { min: n => `Potrzebujemy co najmniej ${MIN} zdjęć (teraz ${n}).`, max: `Maksymalnie ${MAX} zdjęć.`, req: n => n === 1 ? 'Brakuje 1 obowiązkowej odpowiedzi – zaznaczyliśmy ją na czerwono.' : `Brakuje ${n} obowiązkowych odpowiedzi – zaznaczyliśmy je na czerwono.`,
           pool: 'Wpisz, w jakich miesiącach basen jest czynny.', sending: 'Wysyłam odpowiedzi…', up: (i, n) => `Przesyłam zdjęcie ${i} z ${n}…`,
           fin: 'Ostatni krok…', fail: 'Coś poszło nie tak. Spróbuj ponownie za chwilę albo napisz do nas: info@moyarooms.com.',
-          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => n < MIN ? `Wybrane zdjęcia: ${n} (potrzeba co najmniej ${MIN})` : `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.' }
+          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => n < MIN ? `Wybrane zdjęcia: ${n} (potrzeba co najmniej ${MIN})` : `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.', price: 'Podaj co najmniej cenę dla 1–2 osób.' }
   };
   function setLang(l) {
     lang = l;
@@ -25,6 +25,7 @@
     document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
     document.querySelectorAll('option[data-it]').forEach(o => o.textContent = o.dataset[l]);
     document.querySelectorAll('[data-ph-it]').forEach(i => i.placeholder = i.dataset['ph' + (l === 'pl' ? 'Pl' : 'It')]);
+    document.querySelectorAll('[data-al-it]').forEach(i => i.setAttribute('aria-label', i.dataset['al' + (l === 'pl' ? 'Pl' : 'It')]));
     renderCount();
     try { localStorage.setItem('mr_lang', l); } catch (e) {}
   }
@@ -35,6 +36,23 @@
 
   // ---------- piscina ----------
   $('#hasPool').addEventListener('change', e => { $('#poolBox').hidden = !e.target.checked; });
+
+  // ---------- prezzi ----------
+  // riassunto leggibile per l'e-mail + controllo: almeno un prezzo per 1–2 persone
+  function buildPrices() {
+    const rows = {};
+    document.querySelectorAll('#ptab input').forEach(i => {
+      const v = i.value.trim();
+      if (!v) return;
+      (rows[i.dataset.r] = rows[i.dataset.r] || {})[i.dataset.c] = v;
+    });
+    $('#prezzi').value = Object.entries(rows).map(([r, c]) =>
+      `${r}: bassa ${c.bassa ? c.bassa + ' €' : '–'} · alta ${c.alta ? c.alta + ' €' : '–'}`).join('\n');
+    const ok = !!($('#p1bassa').value.trim() || $('#p1alta').value.trim());
+    $('#p1bassa').setCustomValidity(ok ? '' : T[lang].price);
+    return ok;
+  }
+  document.querySelectorAll('#ptab input').forEach(i => i.addEventListener('input', buildPrices));
 
   // ---------- foto ----------
   const input = $('#foto');
@@ -87,12 +105,13 @@
     ev.preventDefault();
     showMsg('');
     $('#piscina').required = $('#hasPool').checked;
+    const pricesOk = buildPrices();
     form.classList.add('tried');
     if (!form.checkValidity()) {
       const bads = [...form.querySelectorAll(':invalid')].filter(el => el.tagName !== 'FIELDSET');
       const n = new Set(bads.map(el => el.type === 'radio' ? 'r:' + el.name : el)).size;
       const bad = bads[0];
-      showMsg(bad && bad.type === 'email' && bad.value ? T[lang].email : T[lang].req(n), false);
+      showMsg(bad && bad.type === 'email' && bad.value ? T[lang].email : (n === 1 && !pricesOk ? T[lang].price : T[lang].req(n)), false);
       if (bad) {
         // porta l'utente alla prima risposta mancante (non al messaggio in fondo)
         const box = bad.closest('.f, .consent, fieldset') || bad;

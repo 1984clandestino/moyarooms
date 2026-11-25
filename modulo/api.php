@@ -55,6 +55,8 @@ const LABELS = [
     'letti' => 'Camere e letti', 'bagni' => 'Bagni', 'piano' => 'Piano, ascensore, scale', 'descrizione' => 'Descrizione del proprietario',
     'dotazioni' => 'Dotazioni', 'dotazioni_altro' => 'Altre dotazioni', 'piscina' => 'Piscina (mesi, privata/comune)',
     'checkin' => 'Check-in', 'checkout' => 'Check-out', 'minimo' => 'Soggiorno minimo', 'apertura' => 'Mesi di apertura',
+    'min_bassa' => 'Notti minime – bassa stagione', 'min_alta' => 'Notti minime – alta stagione', 'alta_periodo' => 'Periodo di alta stagione',
+    'prezzi' => 'Prezzi a notte, alloggio intero (tassa di soggiorno inclusa)', 'prezzi_note' => 'Altre informazioni sui prezzi',
     'animali' => 'Animali', 'fumo_feste' => 'Fumo e feste', 'tassa' => 'Tassa di soggiorno', 'prezzo' => 'Prezzo indicativo (non pubblico)',
     'lingue' => 'Lingue parlate', 'parcheggio' => 'Parcheggio', 'vicino' => 'Cosa c\'è vicino', 'consiglio' => 'Consiglio da locale',
     'copertina' => 'Foto di copertina', 'video' => 'Video / tour', 'wa_turisti' => 'WhatsApp per le richieste dei turisti',
