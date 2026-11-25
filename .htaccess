@@ -15,6 +15,7 @@ RewriteRule ^seba\-2/?$ /avola/apartament-z-basenem/ [R=301,L]
 # Link corti per il modulo proprietari
 RewriteRule ^(aggiungi|modulo-proprietari)/?$ /modulo/?lang=it [R=302,L]
 RewriteRule ^(formularz|dodaj)/?$ /modulo/?lang=pl [R=302,L]
+RewriteRule ^(dla-wlascicieli|wlasciciele)/?$ /proprietari/?lang=pl [R=302,L]
 
 # File di lavoro non pubblici
 RewriteRule ^(data|tools|_zgloszenia)/ - [F,L]

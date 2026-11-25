@@ -595,7 +595,6 @@ def write(rel, content):
 
 def main():
     write('index.html', build_home_v2())
-    write('anteprima/index.html', build_home_v2('/anteprima/', noindex=True))
     urls = ['/']
     for c in CITIES:
         write(f"{c['slug']}/index.html", build_city(c))
