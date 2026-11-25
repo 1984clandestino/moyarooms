@@ -172,6 +172,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .prose li ul{margin:6px 0 0}
 .prose strong{font-weight:600;color:var(--ink)}
 .prose .nota{font-size:14px;color:var(--soft);margin-top:18px}
+.links a.own{border:1.5px solid var(--blue);border-radius:999px;padding:5px 12px;color:var(--blue-ink);font-weight:500}
+.links a.own:hover{background:var(--blue);color:#fff}
+@media(max-width:480px){.links a.own{display:none}}
+.owners .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:center}
+.owners .kick{margin:0 0 6px;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-ink)}
+.owners h2{margin-bottom:12px}
+.ticks{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.ticks li{padding-left:28px;position:relative}
+.ticks li::before{content:"✓";position:absolute;left:4px;color:var(--blue-ink);font-weight:700}
+.obox{background:var(--sand);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
+.obox .big{font-size:18px;font-weight:500;white-space:nowrap}
+.obox .itline{margin:4px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--soft)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Moya Rooms", "item": "https://moyarooms.com/"}, {"@type": "ListItem", "position": 2, "name": "Palermo", "item": "https://moyarooms.com/palermo/"}, {"@type": "ListItem", "position": 3, "name": "Apartament przy katedrze"}]}</script>
 </head>
@@ -184,6 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <a href="/#apartamenty">Apartamenty</a>
 <a href="/#rezerwacja" class="hide-s">Jak zarezerwować</a>
 <a href="#kontakt">Kontakt</a>
+<a class="own" href="/modulo/?lang=pl">Dodaj obiekt</a>
 </div>
 </nav>
 </header>
@@ -279,7 +292,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <footer class="band" style="padding-block:28px">
 <div class="wrap">
 <div><strong style="color:var(--brown)">Moya Rooms</strong> · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria</div>
-<div><a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
+<div><a href="/modulo/?lang=pl">Dla właścicieli: dodaj obiekt</a> · <a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
 </div>
 </footer>
 

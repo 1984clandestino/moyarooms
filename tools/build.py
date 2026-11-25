@@ -181,6 +181,7 @@ def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=Non
 <a href="/#apartamenty">Apartamenty</a>
 <a href="/#rezerwacja" class="hide-s">Jak zarezerwować</a>
 <a href="#kontakt">Kontakt</a>
+<a class="own" href="/modulo/?lang=pl">Dodaj obiekt</a>
 </div>
 </nav>
 </header>
@@ -205,7 +206,7 @@ def page(*, path, title, description, body, og_image='/img/hero.jpg', jsonld=Non
 <footer class="band" style="padding-block:28px">
 <div class="wrap">
 <div><strong style="color:var(--brown)">Moya Rooms</strong> · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria</div>
-<div><a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
+<div><a href="/modulo/?lang=pl">Dla właścicieli: dodaj obiekt</a> · <a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
 </div>
 </footer>
 
@@ -318,6 +319,27 @@ def build_home():
 <div class="step"><h3>Napisz do nas</h3><p>Na WhatsApp lub e-mailem: termin, liczba osób i apartament, który Cię interesuje.</p></div>
 <div class="step"><h3>Sprawdzamy dostępność</h3><p>Odpowiadamy po polsku i wysyłamy cenę za Twój termin.</p></div>
 <div class="step"><h3>Potwierdzamy rezerwację</h3><p>Dostajesz potwierdzenie i wszystkie informacje o przyjeździe.</p></div>
+</div>
+</div>
+</section>
+
+<section id="dla-wlascicieli" class="band owners">
+<div class="wrap">
+<div>
+<p class="kick">Dla właścicieli</p>
+<h2>Masz mieszkanie lub dom we Włoszech?</h2>
+<p>Dodaj swój obiekt do Moya Rooms. Pokażemy go turystom z Polski – po polsku, ze zdjęciami, opisem i informacjami o dojeździe.</p>
+<ul class="ticks">
+<li>Wypełniasz formularz i dodajesz zdjęcia – stronę obiektu przygotujemy my.</li>
+<li>Publikujemy ją dopiero po Twojej akceptacji.</li>
+<li>W okresie próbnym publikacja jest bezpłatna.</li>
+</ul>
+</div>
+<div class="obox">
+<a class="btn main" href="/modulo/?lang=pl">Dodaj obiekt</a>
+<a class="btn" href="{e(wa('Dzień dobry! Mam obiekt we Włoszech i chcę go dodać do Moya Rooms.'))}">Napisz na WhatsApp</a>
+<div>lub zadzwoń: <a class="big" href="tel:+{WA}">{WA_SHOW}</a></div>
+<p lang="it" class="itline">Sei proprietario? <a href="/modulo/?lang=it">Compila il modulo in italiano →</a></p>
 </div>
 </div>
 </section>

@@ -172,6 +172,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .prose li ul{margin:6px 0 0}
 .prose strong{font-weight:600;color:var(--ink)}
 .prose .nota{font-size:14px;color:var(--soft);margin-top:18px}
+.links a.own{border:1.5px solid var(--blue);border-radius:999px;padding:5px 12px;color:var(--blue-ink);font-weight:500}
+.links a.own:hover{background:var(--blue);color:#fff}
+@media(max-width:480px){.links a.own{display:none}}
+.owners .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:center}
+.owners .kick{margin:0 0 6px;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-ink)}
+.owners h2{margin-bottom:12px}
+.ticks{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.ticks li{padding-left:28px;position:relative}
+.ticks li::before{content:"✓";position:absolute;left:4px;color:var(--blue-ink);font-weight:700}
+.obox{background:var(--sand);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
+.obox .big{font-size:18px;font-weight:500;white-space:nowrap}
+.obox .itline{margin:4px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--soft)}
 </style>
 </head>
 <body>
@@ -183,6 +195,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <a href="/#apartamenty">Apartamenty</a>
 <a href="/#rezerwacja" class="hide-s">Jak zarezerwować</a>
 <a href="#kontakt">Kontakt</a>
+<a class="own" href="/modulo/?lang=pl">Dodaj obiekt</a>
 </div>
 </nav>
 </header>
@@ -257,6 +270,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div>
 </section>
 
+<section id="dla-wlascicieli" class="band owners">
+<div class="wrap">
+<div>
+<p class="kick">Dla właścicieli</p>
+<h2>Masz mieszkanie lub dom we Włoszech?</h2>
+<p>Dodaj swój obiekt do Moya Rooms. Pokażemy go turystom z Polski – po polsku, ze zdjęciami, opisem i informacjami o dojeździe.</p>
+<ul class="ticks">
+<li>Wypełniasz formularz i dodajesz zdjęcia – stronę obiektu przygotujemy my.</li>
+<li>Publikujemy ją dopiero po Twojej akceptacji.</li>
+<li>W okresie próbnym publikacja jest bezpłatna.</li>
+</ul>
+</div>
+<div class="obox">
+<a class="btn main" href="/modulo/?lang=pl">Dodaj obiekt</a>
+<a class="btn" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Mam%20obiekt%20we%20W%C5%82oszech%20i%20chc%C4%99%20go%20doda%C4%87%20do%20Moya%20Rooms.">Napisz na WhatsApp</a>
+<div>lub zadzwoń: <a class="big" href="tel:+393446501947">+39 344 650 1947</a></div>
+<p lang="it" class="itline">Sei proprietario? <a href="/modulo/?lang=it">Compila il modulo in italiano →</a></p>
+</div>
+</div>
+</section>
+
 <section id="wycieczki" class="band" hidden>
 <div class="wrap"><h2>Wycieczki</h2><p>Sekcja w przygotowaniu.</p></div>
 </section>
@@ -288,7 +322,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <footer class="band" style="padding-block:28px">
 <div class="wrap">
 <div><strong style="color:var(--brown)">Moya Rooms</strong> · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria</div>
-<div><a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
+<div><a href="/modulo/?lang=pl">Dla właścicieli: dodaj obiekt</a> · <a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
 </div>
 </footer>
 
