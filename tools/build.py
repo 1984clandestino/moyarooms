@@ -331,7 +331,7 @@ def build_home():
 <p>Dodaj swój obiekt do Moya Rooms. Pokażemy go turystom z Polski – po polsku, ze zdjęciami, opisem i informacjami o dojeździe.</p>
 <ul class="ticks">
 <li>Wypełniasz formularz i dodajesz zdjęcia – stronę obiektu przygotujemy my.</li>
-<li>Publikujemy ją dopiero po Twojej akceptacji.</li>
+<li>Wyślemy Ci link do strony – jeśli zechcesz coś zmienić, poprawimy ją.</li>
 <li>W okresie próbnym publikacja jest bezpłatna.</li>
 </ul>
 </div>
