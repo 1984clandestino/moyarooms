@@ -14,6 +14,12 @@
 <link rel="stylesheet" href="/css/site.css">
 <style>
 html[lang=it] .pl, html[lang=pl] .it{display:none!important}
+[hidden]{display:none!important}
+.stepper{margin:0 0 22px}
+.stepT{margin:0;font-family:Outfit,sans-serif;font-weight:600;font-size:18px;color:var(--brown)}
+.snav{display:flex;gap:10px;margin:0 0 12px}
+.snav .btn{min-height:52px;font-size:17px}
+#nextBtn{flex:1}
 .fwrap{max-width:760px;margin:0 auto}
 .lang{display:flex;gap:6px}
 .lang button{min-height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--blue);background:transparent;color:var(--blue-ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
@@ -91,8 +97,13 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <form id="f" novalidate>
 <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 <input type="hidden" name="lingua" id="lingua" value="it">
+<div class="stepper" id="stepper">
+<p class="stepT" id="stepT"></p>
+<div class="bar"><i id="stepI"></i></div>
+<p class="mini" style="margin:6px 0 0"><span class="it">Le risposte restano salvate su questo dispositivo finché non invii il modulo (le foto no).</span><span class="pl">Odpowiedzi zapisują się na tym urządzeniu, dopóki nie wyślesz formularza (zdjęcia nie).</span></p>
+</div>
 
-<fieldset>
+<fieldset data-step="1">
 <legend><span class="it">1. I tuoi contatti</span><span class="pl">1. Twoje dane kontaktowe</span></legend>
 <div class="f"><label class="req" for="nome"><span class="it">Nome e cognome</span><span class="pl">Imię i nazwisko</span></label><input type="text" id="nome" name="nome" required autocomplete="name"></div>
 <div class="two">
@@ -106,7 +117,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 </div></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="1">
 <legend><span class="it">2. L'alloggio</span><span class="pl">2. Obiekt</span></legend>
 <div class="two">
 <div class="f"><label class="req" for="tipo"><span class="it">Tipo di alloggio</span><span class="pl">Rodzaj obiektu</span></label>
@@ -162,7 +173,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <textarea id="descrizione" name="descrizione" required></textarea></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="2">
 <legend><span class="it">3. Dotazioni</span><span class="pl">3. Wyposażenie</span></legend>
 <div class="f"><span class="lbl"><span class="it">Cosa c'è nell'alloggio?</span><span class="pl">Co jest w obiekcie?</span></span>
 <div class="choices" id="dot">
@@ -186,7 +197,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="f"><label for="dotazioni_altro"><span class="it">Altro</span><span class="pl">Inne</span></label><input type="text" id="dotazioni_altro" name="dotazioni_altro"></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="2">
 <legend><span class="it">4. Regole e soggiorno</span><span class="pl">4. Zasady i pobyt</span></legend>
 <div class="two">
 <div class="f"><label class="req" for="checkin"><span class="it">Check-in (dalle… alle…)</span><span class="pl">Zameldowanie (od… do…)</span></label><input type="text" id="checkin" name="checkin" required data-ph-it="es. 15:00–20:00" data-ph-pl="np. 15:00–20:00"></div>
@@ -203,7 +214,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="f"><label for="lingue"><span class="it">Che lingue parli con gli ospiti?</span><span class="pl">W jakich językach rozmawiasz z gośćmi?</span></label><input type="text" id="lingue" name="lingue"></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="2">
 <legend><span class="it">5. Prezzi</span><span class="pl">5. Ceny</span></legend>
 <p class="hint" style="margin:0 0 14px"><span class="it">Ci servono per preparare i preventivi per i turisti. Sul sito non pubblichiamo i prezzi senza il tuo consenso.</span><span class="pl">Potrzebujemy ich do przygotowania wycen dla turystów. Bez Twojej zgody nie publikujemy cen na stronie.</span></p>
 <div class="two">
@@ -225,7 +236,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <textarea id="prezzi_note" name="prezzi_note"></textarea></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="3">
 <legend><span class="it">6. Zona e parcheggio</span><span class="pl">6. Okolica i parking</span></legend>
 <p class="hint" style="margin:0 0 14px"><span class="it">Aeroporto, autobus, treni, biglietti e ZTL li verifichiamo noi. Qui ci servono solo le cose che sai tu.</span><span class="pl">Dojazd z lotniska, autobusy, pociągi, bilety i strefy ZTL sprawdzamy sami. Tu potrzebujemy tylko tego, co wiesz Ty.</span></p>
 <div class="f"><span class="lbl req"><span class="it">Dove si parcheggia?</span><span class="pl">Gdzie można zaparkować?</span></span>
@@ -239,7 +250,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="f"><label for="consiglio"><span class="it">Un consiglio per gli ospiti: la fermata più comoda, dove mangiare, la spiaggia che preferisci</span><span class="pl">Rada dla gości: najwygodniejszy przystanek, gdzie zjeść, Twoja ulubiona plaża</span></label><textarea id="consiglio" name="consiglio"></textarea></div>
 </fieldset>
 
-<fieldset>
+<fieldset data-step="3">
 <legend><span class="it">7. Foto</span><span class="pl">7. Zdjęcia</span></legend>
 <p class="hint" style="margin:0 0 14px"><span class="it">Foto orizzontali, con luce del giorno e stanze in ordine. Almeno una foto per ogni stanza, più l'esterno e la vista. Niente collage, scritte o loghi.</span><span class="pl">Zdjęcia w poziomie, przy dziennym świetle, w uporządkowanych wnętrzach. Co najmniej jedno zdjęcie każdego pomieszczenia oraz budynek z zewnątrz i widok. Bez kolaży, napisów i logo.</span></p>
 <label class="drop" for="foto">
@@ -253,9 +264,18 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="f"><label for="video"><span class="it">Link a un video o tour virtuale (facoltativo)</span><span class="pl">Link do filmu lub wirtualnego spaceru (opcjonalnie)</span></label><input type="url" id="video" name="video" inputmode="url"></div>
 </fieldset>
 
-<fieldset>
-<legend><span class="it">8. Contatto per i turisti e consensi</span><span class="pl">8. Kontakt dla turystów i zgody</span></legend>
-<div class="f"><label class="req" for="wa_turisti"><span class="it">Su quale numero WhatsApp vuoi ricevere le richieste dei turisti?</span><span class="pl">Na jaki numer WhatsApp chcesz otrzymywać zapytania od turystów?</span></label><input type="tel" id="wa_turisti" name="wa_turisti" required></div>
+<fieldset data-step="4">
+<legend><span class="it">8. Prenotazioni e consensi</span><span class="pl">8. Rezerwacje i zgody</span></legend>
+<p class="pnote"><span class="it"><strong>Come funzionano le richieste.</strong> I turisti scrivono a noi, sul WhatsApp di Moya Rooms. Ti contattiamo noi per verificare la disponibilità e, quando la prenotazione è confermata, ti mandiamo i dati degli ospiti.</span><span class="pl"><strong>Jak działają zapytania.</strong> Turyści piszą do nas, na WhatsApp Moya Rooms. To my kontaktujemy się z Tobą, żeby sprawdzić dostępność, a po potwierdzeniu rezerwacji przesyłamy Ci dane gości.</span></p>
+<div class="f"><span class="lbl req"><span class="it">Come preferisci essere contattato per le richieste?</span><span class="pl">Jak mamy się z Tobą kontaktować w sprawie zapytań?</span></span>
+<div class="choices">
+<label><input type="radio" name="contatto_pref" value="WhatsApp" required>WhatsApp</label>
+<label><input type="radio" name="contatto_pref" value="Telefonata"><span class="it">Telefonata</span><span class="pl">Telefon</span></label>
+<label><input type="radio" name="contatto_pref" value="E-mail">E-mail</label>
+</div></div>
+<div class="f"><label for="link_annunci"><span class="it">Il tuo alloggio è già su Booking, Airbnb o altri siti? Incolla i link (facoltativo)</span><span class="pl">Czy Twój obiekt jest już na Booking, Airbnb lub innych stronach? Wklej linki (opcjonalnie)</span></label>
+<span class="hint"><span class="it">Ci aiuta a controllare più velocemente la disponibilità.</span><span class="pl">Dzięki temu szybciej sprawdzimy dostępność.</span></span>
+<textarea id="link_annunci" name="link_annunci" style="min-height:70px"></textarea></div>
 <label class="consent"><input type="checkbox" name="consensi[]" value="Dati veri" required><span><span class="it">Dichiaro di essere il proprietario o un gestore autorizzato e che i dati inseriti sono corretti. *</span><span class="pl">Oświadczam, że jestem właścicielem lub upoważnionym zarządcą, a podane dane są prawdziwe. *</span></span></label>
 <label class="consent"><input type="checkbox" name="consensi[]" value="Diritti sulle foto e pubblicazione" required><span><span class="it">Dichiaro di avere i diritti sulle foto e autorizzo la pubblicazione su moyarooms.com e sui profili social di Moya Rooms. *</span><span class="pl">Oświadczam, że mam prawa do zdjęć, i zgadzam się na ich publikację na moyarooms.com oraz w profilach społecznościowych Moya Rooms. *</span></span></label>
 <label class="consent"><input type="checkbox" name="consensi[]" value="Prova gratuita" required><span><span class="it">So che la pubblicazione è gratuita nel periodo di prova, senza rinnovo automatico, e che posso chiedere in ogni momento di togliere l'annuncio. *</span><span class="pl">Wiem, że w okresie próbnym publikacja jest bezpłatna, bez automatycznego przedłużenia, i że w każdej chwili mogę poprosić o usunięcie ogłoszenia. *</span></span></label>
@@ -264,6 +284,10 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 
 <div id="msg" class="ferr" hidden></div>
 <div id="prog" hidden><div class="bar"><i id="barI"></i></div><p class="mini" id="progT"></p></div>
+<div class="snav">
+<button type="button" class="btn" id="prevBtn">← <span class="it">Indietro</span><span class="pl">Wstecz</span></button>
+<button type="button" class="btn main" id="nextBtn"><span class="it">Avanti</span><span class="pl">Dalej</span> →</button>
+</div>
 <button type="submit" class="btn main" id="sendBtn" style="width:100%;min-height:52px;font-size:17px"><span class="it">Invia il modulo</span><span class="pl">Wyślij formularz</span></button>
 </form>
 </div>
@@ -281,6 +305,6 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <div class="wrap mini">Moya Rooms · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria · <a href="mailto:info@moyarooms.com">info@moyarooms.com</a> · <a href="/modulo/informativa.html">Privacy</a></div>
 </footer>
 
-<script src="/modulo/modulo.js?v=4"></script>
+<script src="/modulo/modulo.js?v=5"></script>
 </body>
 </html>

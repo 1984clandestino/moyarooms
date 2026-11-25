@@ -60,6 +60,7 @@ const LABELS = [
     'animali' => 'Animali', 'fumo_feste' => 'Fumo e feste', 'tassa' => 'Tassa di soggiorno', 'prezzo' => 'Prezzo indicativo (non pubblico)',
     'lingue' => 'Lingue parlate', 'parcheggio' => 'Parcheggio', 'vicino' => 'Cosa c\'è vicino', 'consiglio' => 'Consiglio da locale',
     'copertina' => 'Foto di copertina', 'video' => 'Video / tour', 'wa_turisti' => 'WhatsApp per le richieste dei turisti',
+    'contatto_pref' => 'Contatto preferito per le richieste', 'link_annunci' => 'Link ad altri annunci (Booking, Airbnb…)',
     'consensi' => 'Consensi',
 ];
 

@@ -5,6 +5,8 @@
   const $ = s => document.querySelector(s);
   const form = $('#f'), msg = $('#msg'), btn = $('#sendBtn');
   let lang = 'it';
+  let step = 1;
+  const NSTEP = 4, KEY = 'mr_form_v1';
   const photos = []; // {file, url}
 
   // ---------- lingua ----------
@@ -12,11 +14,13 @@
     it: { min: n => `Servono almeno ${MIN} foto (ora ${n}).`, max: `Massimo ${MAX} foto.`, req: n => n === 1 ? 'Manca 1 risposta obbligatoria: è evidenziata in rosso.' : `Mancano ${n} risposte obbligatorie: sono evidenziate in rosso.`,
           pool: 'Scrivi i mesi di apertura della piscina.', sending: 'Invio delle risposte…', up: (i, n) => `Carico la foto ${i} di ${n}…`,
           fin: 'Ultimo passo…', fail: 'Qualcosa non ha funzionato. Riprova tra poco oppure scrivici a info@moyarooms.com.',
-          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => n < MIN ? `${n} foto scelte (ne servono almeno ${MIN})` : `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.', price: 'Scrivi almeno il prezzo per 1–2 persone.' },
+          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => n < MIN ? `${n} foto scelte (ne servono almeno ${MIN})` : `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.', price: 'Scrivi almeno il prezzo per 1–2 persone.',
+          steps: ['I tuoi dati e l\'alloggio', 'Dotazioni, regole e prezzi', 'Zona e foto', 'Prenotazioni e invio'], stepT: (n, t) => `Passo ${n} di ${NSTEP} · ${t}` },
     pl: { min: n => `Potrzebujemy co najmniej ${MIN} zdjęć (teraz ${n}).`, max: `Maksymalnie ${MAX} zdjęć.`, req: n => n === 1 ? 'Brakuje 1 obowiązkowej odpowiedzi – zaznaczyliśmy ją na czerwono.' : `Brakuje ${n} obowiązkowych odpowiedzi – zaznaczyliśmy je na czerwono.`,
           pool: 'Wpisz, w jakich miesiącach basen jest czynny.', sending: 'Wysyłam odpowiedzi…', up: (i, n) => `Przesyłam zdjęcie ${i} z ${n}…`,
           fin: 'Ostatni krok…', fail: 'Coś poszło nie tak. Spróbuj ponownie za chwilę albo napisz do nas: info@moyarooms.com.',
-          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => n < MIN ? `Wybrane zdjęcia: ${n} (potrzeba co najmniej ${MIN})` : `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.', price: 'Podaj co najmniej cenę dla 1–2 osób.' }
+          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => n < MIN ? `Wybrane zdjęcia: ${n} (potrzeba co najmniej ${MIN})` : `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.', price: 'Podaj co najmniej cenę dla 1–2 osób.',
+          steps: ['Twoje dane i obiekt', 'Wyposażenie, zasady i ceny', 'Okolica i zdjęcia', 'Rezerwacje i wysyłka'], stepT: (n, t) => `Krok ${n} z ${NSTEP} · ${t}` }
   };
   function setLang(l) {
     lang = l;
@@ -27,6 +31,7 @@
     document.querySelectorAll('[data-ph-it]').forEach(i => i.placeholder = i.dataset['ph' + (l === 'pl' ? 'Pl' : 'It')]);
     document.querySelectorAll('[data-al-it]').forEach(i => i.setAttribute('aria-label', i.dataset['al' + (l === 'pl' ? 'Pl' : 'It')]));
     renderCount();
+    renderStep();
     try { localStorage.setItem('mr_lang', l); } catch (e) {}
   }
   document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
@@ -101,32 +106,88 @@
     return j;
   }
 
-  form.addEventListener('submit', async ev => {
-    ev.preventDefault();
-    showMsg('');
+  // ---------- passaggi ----------
+  const FS = [...form.querySelectorAll('fieldset[data-step]')];
+  function renderStep() {
+    const el = $('#stepT'); if (!el) return;
+    el.textContent = T[lang].stepT(step, T[lang].steps[step - 1]);
+    $('#stepI').style.width = Math.round(step / NSTEP * 100) + '%';
+  }
+  function show(n, scroll = true) {
+    step = n;
+    FS.forEach(f => { f.hidden = +f.dataset.step !== n; });
+    $('#prevBtn').hidden = n === 1;
+    $('#nextBtn').hidden = n === NSTEP;
+    btn.hidden = n !== NSTEP;
+    renderStep();
+    showMsg('', false);
+    if (scroll) $('#stepper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    save();
+  }
+  // controlla un passaggio; se manca qualcosa lo mostra, evidenzia e porta alla prima risposta mancante
+  function stepOk(n) {
     $('#piscina').required = $('#hasPool').checked;
     const pricesOk = buildPrices();
-    form.classList.add('tried');
-    if (!form.checkValidity()) {
-      const bads = [...form.querySelectorAll(':invalid')].filter(el => el.tagName !== 'FIELDSET');
-      const n = new Set(bads.map(el => el.type === 'radio' ? 'r:' + el.name : el)).size;
+    const sets = FS.filter(f => +f.dataset.step === n);
+    const bads = sets.flatMap(f => [...f.querySelectorAll('input, select, textarea')].filter(el => !el.checkValidity()));
+    const fewPhotos = n === 3 && photos.length < MIN;
+    if (!bads.length && !fewPhotos) return true;
+    if (step !== n) show(n, false);
+    sets.forEach(f => f.classList.add('tried'));
+    if (bads.length) {
+      const cnt = new Set(bads.map(el => el.type === 'radio' ? 'r:' + el.name : el)).size;
       const bad = bads[0];
-      showMsg(bad && bad.type === 'email' && bad.value ? T[lang].email : (n === 1 && !pricesOk ? T[lang].price : T[lang].req(n)), false);
-      if (bad) {
-        // porta l'utente alla prima risposta mancante (non al messaggio in fondo)
-        const box = bad.closest('.f, .consent, fieldset') || bad;
-        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => bad.focus({ preventScroll: true }), 400);
-      }
-      return;
-    }
-    if (photos.length < MIN) {
+      showMsg(bad.type === 'email' && bad.value ? T[lang].email : (cnt === 1 && !pricesOk ? T[lang].price : T[lang].req(cnt)), false);
+      (bad.closest('.f, .consent, fieldset') || bad).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => bad.focus({ preventScroll: true }), 400);
+    } else {
       const c = $('#count');
       c.textContent = T[lang].min(photos.length); c.classList.add('bad');
       showMsg(T[lang].min(photos.length), false);
       $('.drop').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
     }
+    return false;
+  }
+  $('#nextBtn').addEventListener('click', () => { if (stepOk(step)) show(step + 1); });
+  $('#prevBtn').addEventListener('click', () => show(step - 1));
+
+  // ---------- salvataggio automatico (solo su questo dispositivo) ----------
+  function save() {
+    try {
+      const d = { step, v: {}, r: {}, c: {}, p: {} };
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.dataset.r) { d.p[el.dataset.r + '|' + el.dataset.c] = el.value; return; }
+        if (!el.name || el.type === 'file' || el.type === 'hidden' || el.name === 'website') return;
+        if (el.type === 'radio') { if (el.checked) d.r[el.name] = el.value; return; }
+        if (el.type === 'checkbox') { (d.c[el.name] = d.c[el.name] || []); if (el.checked) d.c[el.name].push(el.value); return; }
+        d.v[el.name] = el.value;
+      });
+      localStorage.setItem(KEY, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function restore() {
+    let d = null; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (!d) return 1;
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+      if (el.dataset.r) { const k = el.dataset.r + '|' + el.dataset.c; if (k in d.p) el.value = d.p[k]; return; }
+      if (!el.name || el.type === 'file' || el.type === 'hidden' || el.name === 'website') return;
+      if (el.type === 'radio') { el.checked = d.r[el.name] === el.value; return; }
+      if (el.type === 'checkbox') { el.checked = (d.c[el.name] || []).includes(el.value); return; }
+      if (el.name in d.v) el.value = d.v[el.name];
+    });
+    $('#poolBox').hidden = !$('#hasPool').checked;
+    return Math.min(Math.max(+d.step || 1, 1), NSTEP);
+  }
+  form.addEventListener('input', save);
+  form.addEventListener('change', save);
+  show(restore(), false);
+
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    showMsg('');
+    // «Invio» sulla tastiera prima dell'ultimo passaggio = Avanti
+    if (step < NSTEP) { if (stepOk(step)) show(step + 1); return; }
+    for (let n = 1; n <= NSTEP; n++) if (!stepOk(n)) return;
 
     btn.disabled = true;
     try {
@@ -154,6 +215,7 @@
       const fin = new FormData(); fin.append('action', 'finish'); fin.append('id', id); fin.append('k', k);
       await post(fin);
       progress(100, '');
+      try { localStorage.removeItem(KEY); } catch (e) {}
       $('#formView').hidden = true; $('#doneView').hidden = false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (e) {
