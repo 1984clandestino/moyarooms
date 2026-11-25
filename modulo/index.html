@@ -19,7 +19,7 @@ html[lang=it] .pl, html[lang=pl] .it{display:none!important}
 .lang button{min-height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--blue);background:transparent;color:var(--blue-ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
 .lang button[aria-pressed=true]{background:var(--blue);color:#fff}
 .intro{font-size:17px;color:var(--soft);margin-top:12px}
-.steps{display:grid;gap:8px;margin:18px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps{display:grid;grid-template-columns:1fr;gap:8px;margin:18px 0 0;padding:0;list-style:none;counter-reset:s}
 .steps li{counter-increment:s;padding-left:34px;position:relative}
 .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;display:grid;place-items:center}
 fieldset{border:1px solid var(--line);border-radius:14px;padding:18px clamp(14px,3vw,24px) 8px;margin:0 0 22px;background:var(--card)}
@@ -39,7 +39,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 .choices label:has(input:checked){border-color:var(--blue);background:var(--sky)}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px}
 .consent input{margin-top:4px;width:20px;height:20px;accent-color:var(--blue);flex:none}
-.drop{border:2px dashed var(--blue);border-radius:14px;padding:22px;text-align:center;background:var(--sky);cursor:pointer}
+.drop{display:block;border:2px dashed var(--blue);border-radius:14px;padding:22px;text-align:center;background:var(--sky);cursor:pointer}
 .drop strong{display:block;font-size:17px}
 .thumbs2{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:12px}
 .thumbs2 div{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--sand)}
@@ -47,8 +47,9 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 .thumbs2 button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:18px;line-height:1;cursor:pointer}
 .thumbs2 span{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;border-radius:6px;padding:1px 6px}
 .count{margin-top:8px;font-size:14px;color:var(--soft)}
+.count.bad{color:#8c1d18;font-weight:500}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.err{background:#fde8e6;color:#8c1d18;border-radius:10px;padding:10px 14px;margin:0 0 16px}
+.ferr{background:#fde8e6;color:#8c1d18;border-radius:10px;padding:10px 14px;margin:0 0 16px}
 .bar{height:12px;border-radius:6px;background:var(--sand);overflow:hidden;margin:10px 0}
 .bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
 .done{text-align:center;padding:30px 0}
@@ -239,7 +240,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid color-mix(in srgb,var(
 <label class="consent"><input type="checkbox" name="consensi[]" value="Informativa privacy letta" required><span><span class="it">Ho letto l'<a href="/modulo/informativa.html" target="_blank">informativa sulla privacy</a>. *</span><span class="pl">Zapoznałem(-am) się z <a href="/modulo/informativa.html" target="_blank">informacją o ochronie danych</a>. *</span></span></label>
 </fieldset>
 
-<div id="msg" class="err" hidden></div>
+<div id="msg" class="ferr" hidden></div>
 <div id="prog" hidden><div class="bar"><i id="barI"></i></div><p class="mini" id="progT"></p></div>
 <button type="submit" class="btn main" id="sendBtn" style="width:100%;min-height:52px;font-size:17px"><span class="it">Invia il modulo</span><span class="pl">Wyślij formularz</span></button>
 </form>

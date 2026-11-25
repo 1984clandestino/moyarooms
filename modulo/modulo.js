@@ -9,14 +9,14 @@
 
   // ---------- lingua ----------
   const T = {
-    it: { min: n => `Servono almeno ${MIN} foto (ora ${n}).`, max: `Massimo ${MAX} foto.`, req: 'Mancano alcune risposte obbligatorie: le abbiamo evidenziate.',
+    it: { min: n => `Servono almeno ${MIN} foto (ora ${n}).`, max: `Massimo ${MAX} foto.`, req: n => n === 1 ? 'Manca 1 risposta obbligatoria: è evidenziata in rosso.' : `Mancano ${n} risposte obbligatorie: sono evidenziate in rosso.`,
           pool: 'Scrivi i mesi di apertura della piscina.', sending: 'Invio delle risposte…', up: (i, n) => `Carico la foto ${i} di ${n}…`,
           fin: 'Ultimo passo…', fail: 'Qualcosa non ha funzionato. Riprova tra poco oppure scrivici a info@moyarooms.com.',
-          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.' },
-    pl: { min: n => `Potrzebujemy co najmniej ${MIN} zdjęć (teraz ${n}).`, max: `Maksymalnie ${MAX} zdjęć.`, req: 'Brakuje kilku obowiązkowych odpowiedzi – zaznaczyliśmy je.',
+          fast: 'Hai compilato troppo in fretta: attendi qualche secondo e riprova.', count: n => n < MIN ? `${n} foto scelte (ne servono almeno ${MIN})` : `${n} foto scelte`, email: 'Controlla l\'indirizzo e-mail.' },
+    pl: { min: n => `Potrzebujemy co najmniej ${MIN} zdjęć (teraz ${n}).`, max: `Maksymalnie ${MAX} zdjęć.`, req: n => n === 1 ? 'Brakuje 1 obowiązkowej odpowiedzi – zaznaczyliśmy ją na czerwono.' : `Brakuje ${n} obowiązkowych odpowiedzi – zaznaczyliśmy je na czerwono.`,
           pool: 'Wpisz, w jakich miesiącach basen jest czynny.', sending: 'Wysyłam odpowiedzi…', up: (i, n) => `Przesyłam zdjęcie ${i} z ${n}…`,
           fin: 'Ostatni krok…', fail: 'Coś poszło nie tak. Spróbuj ponownie za chwilę albo napisz do nas: info@moyarooms.com.',
-          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.' }
+          fast: 'Formularz wypełniono zbyt szybko – odczekaj kilka sekund i spróbuj ponownie.', count: n => n < MIN ? `Wybrane zdjęcia: ${n} (potrzeba co najmniej ${MIN})` : `Wybrane zdjęcia: ${n}`, email: 'Sprawdź adres e-mail.' }
   };
   function setLang(l) {
     lang = l;
@@ -58,7 +58,7 @@
     });
     renderCount();
   }
-  function renderCount() { $('#count').textContent = photos.length ? T[lang].count(photos.length) : ''; }
+  function renderCount() { const c = $('#count'); c.textContent = photos.length ? T[lang].count(photos.length) : ''; if (photos.length >= MIN) c.classList.remove('bad'); }
 
   async function shrink(file) {
     try {
@@ -74,7 +74,7 @@
   }
 
   // ---------- invio ----------
-  function showMsg(t) { msg.textContent = t; msg.hidden = !t; if (t) msg.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  function showMsg(t, scroll = true) { msg.textContent = t; msg.hidden = !t; if (t && scroll) msg.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   function progress(p, t) { $('#prog').hidden = false; $('#barI').style.width = p + '%'; $('#progT').textContent = t; }
   async function post(data) {
     const r = await fetch(API, { method: 'POST', body: data });
@@ -89,12 +89,25 @@
     $('#piscina').required = $('#hasPool').checked;
     form.classList.add('tried');
     if (!form.checkValidity()) {
-      const bad = form.querySelector(':invalid');
-      showMsg(bad && bad.type === 'email' && bad.value ? T[lang].email : T[lang].req);
-      if (bad) bad.focus({ preventScroll: true });
+      const bads = [...form.querySelectorAll(':invalid')].filter(el => el.tagName !== 'FIELDSET');
+      const n = new Set(bads.map(el => el.type === 'radio' ? 'r:' + el.name : el)).size;
+      const bad = bads[0];
+      showMsg(bad && bad.type === 'email' && bad.value ? T[lang].email : T[lang].req(n), false);
+      if (bad) {
+        // porta l'utente alla prima risposta mancante (non al messaggio in fondo)
+        const box = bad.closest('.f, .consent, fieldset') || bad;
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => bad.focus({ preventScroll: true }), 400);
+      }
       return;
     }
-    if (photos.length < MIN) { showMsg(T[lang].min(photos.length)); return; }
+    if (photos.length < MIN) {
+      const c = $('#count');
+      c.textContent = T[lang].min(photos.length); c.classList.add('bad');
+      showMsg(T[lang].min(photos.length), false);
+      $('.drop').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     btn.disabled = true;
     try {
