@@ -184,6 +184,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .obox{background:var(--sand);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
 .obox .big{font-size:18px;font-weight:500;white-space:nowrap}
 .obox .itline{margin:4px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--soft)}
+[hidden]{display:none!important}
+.hm-hero{padding-top:clamp(28px,5vw,64px)}
+.hm-hero .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:28px clamp(32px,5vw,64px);align-items:center}
+.hm-hero h1{font-size:clamp(34px,5.6vw,58px);margin:0 0 14px}
+.hm-hero .lead{color:var(--soft);font-size:17px;max-width:30em;margin:0 0 18px}
+.hm-regions{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px}
+.hm-regions li{border:1.5px dashed var(--line);border-radius:999px;padding:7px 14px;font-size:15px;color:var(--soft)}
+.hm-regions li.on{border:1.5px solid var(--brown);padding:0}
+.hm-regions li.on a{display:block;padding:7px 14px;color:var(--ink);text-decoration:none}
+.hm-regions strong{color:var(--brown)}
+.hm-hero .acts{display:flex;gap:10px;flex-wrap:wrap}
+.hm-mosaic{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:clamp(380px,62vw,560px)}
+.hm-mosaic a{position:relative;border-radius:16px;overflow:hidden;display:block}
+.hm-mosaic a:first-child{grid-row:1/3}
+.hm-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.hm-mosaic a:nth-child(3) img{object-position:center 80%}
+.hm-mosaic span{position:absolute;left:10px;bottom:10px;background:rgba(31,22,16,.72);color:#fff;font-size:14px;font-weight:500;padding:5px 11px;border-radius:8px}
+.hm-why{background:var(--sand);padding-block:clamp(28px,4vw,44px)}
+.hm-why .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px 40px}
+.hm-why h2{font-size:20px;margin:0 0 6px}
+.hm-why p{margin:0;color:var(--soft)}
+.hm-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:14px -4px 22px;padding:2px 4px}
+.hm-tabs button{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.hm-tabs button b{font-weight:500;font-size:14px;color:var(--soft)}
+.hm-tabs button[aria-pressed=true]{background:var(--brown);border-color:var(--brown);color:#fff}
+.hm-tabs button[aria-pressed=true] b{color:#f3e7da}
+#hmList .apt p,#hmList .apt .units{display:none}
+#hmList .apt .tags span:nth-child(n+4){display:none}
+.hm-maptxt{color:var(--soft);margin:6px 0 16px}
+.hm-map{height:clamp(340px,55vw,480px);border-radius:16px;overflow:hidden;background:#dfe8ea;border:1px solid var(--line)}
+.hm-pin span{display:block;width:24px;height:24px;border-radius:50%;background:#8B5A3C;border:4px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.35)}
+.hm-pop{display:grid;gap:2px;text-decoration:none;color:var(--ink);width:190px}
+.hm-pop img{width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:6px}
+.hm-pop strong{color:#8B5A3C;font:600 15px Outfit,sans-serif}
+.hm-pop span{font-size:13px;color:#6b5444}
+.hm-pop em{font-style:normal;color:#176f89;font-size:13px;margin-top:4px;text-decoration:underline}
+@media(max-width:600px){.hm-hero .acts .btn{flex:1 1 100%}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Moya Rooms", "item": "https://moyarooms.com/"}, {"@type": "ListItem", "position": 2, "name": "Avola"}]}</script>
 </head>
@@ -214,13 +251,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <div class="wrap">
 <h2>2 apartamenty w Avoli</h2>
 <div class="grid">
-<article class="apt">
+<article class="apt" data-city="avola">
 <a class="ph" href="/avola/apartament-w-centrum/"><img src="/img/seba1-01.jpg" srcset="/img/w/seba1-01-480.webp 480w, /img/w/seba1-01-960.webp 960w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament w centrum w Avoli – Kuchnia z jadalnią i łóżkiem" width="1200" height="1600" loading="lazy" decoding="async"><span class="n">13 zdjęć</span></a>
 <div class="in"><h3><a href="/avola/apartament-w-centrum/">Apartament w centrum</a></h3><div class="sub">App. Seba 1</div><div class="where">Avola · via Giovanni Huss, 400 m od starego miasta, 500 m od morza</div>
 <p>Nowo urządzone mieszkanie na parterze (65 m²) z niezależnym wejściem, w spokojnej okolicy – kilka minut spacerem od zabytkowego centrum Avoli i od plaży Pantanello. Duża kuchnia z jadalnią, osobna sypialnia i słoneczny taras na piętrze.</p><div class="tags"><span>2–4 osoby</span><span>65 m²</span><span>parter, niezależne wejście</span><span>słoneczny taras</span><span>bezpłatny parking</span><span>zwierzęta na życzenie</span></div>
 <div class="foot"><span class="cin">CIN: IT089002C2IFIP2FLD</span><span class="bts"><a class="btn sm" href="/avola/apartament-w-centrum/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20w%20centrum%20w%20Avoli%20%28App.%20Seba%201%29.%20https%3A//moyarooms.com/avola/apartament-w-centrum/">Zapytaj o termin</a></span></div></div>
 </article>
-<article class="apt">
+<article class="apt" data-city="avola">
 <a class="ph" href="/avola/apartament-z-basenem/"><img src="/img/seba2-01.jpg" srcset="/img/w/seba2-01-480.webp 480w, /img/w/seba2-01-960.webp 960w, /img/w/seba2-01-1600.webp 1600w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament z basenem w Avoli – Basen z leżakami" width="1600" height="1200" loading="lazy" decoding="async"><span class="n">16 zdjęć</span></a>
 <div class="in"><h3><a href="/avola/apartament-z-basenem/">Apartament z basenem</a></h3><div class="sub">App. Seba 2</div><div class="where">Avola · ok. 3 km od centrum, 1,5 km od plaży</div>
 <p>Przestronne mieszkanie (120 m²) na pierwszym piętrze willi z basenem i ogrodem. Trzy sypialnie, dwie kuchnie, dwie łazienki i taras ze stołem i kanapami – wygodne dla dwóch rodzin lub grupy znajomych.</p><div class="tags"><span>do 8 osób</span><span>120 m²</span><span>3 sypialnie</span><span>2 kuchnie</span><span>2 łazienki</span><span>basen</span><span>prywatny parking</span></div>

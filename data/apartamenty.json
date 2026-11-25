@@ -99,7 +99,13 @@
   "title": "Apartament przy morzu",
   "h1": "Apartament przy morzu w Katanii",
   "short": "adriana",
-  "citySlug": "katania"
+  "citySlug": "katania",
+  "street": "via San Giovanni Li Cuti",
+  "geo": [
+   37.52003,
+   15.11012
+  ],
+  "cover": "adriana-09"
  },
  {
   "id": "peppe",
@@ -209,7 +215,12 @@
   "title": "Apartament w centrum",
   "h1": "Apartament w centrum Katanii",
   "short": "peppe",
-  "citySlug": "katania"
+  "citySlug": "katania",
+  "street": "via Riccardo da Lentini",
+  "geo": [
+   37.50004,
+   15.08373
+  ]
  },
  {
   "id": "iwona",
@@ -319,7 +330,12 @@
   "title": "Apartament przy katedrze",
   "h1": "Apartament przy katedrze w Palermo",
   "short": "iwona",
-  "citySlug": "palermo"
+  "citySlug": "palermo",
+  "street": "Piazza della Vittoria",
+  "geo": [
+   38.1119,
+   13.3546
+  ]
  },
  {
   "id": "seba1",
@@ -434,7 +450,12 @@
   "title": "Apartament w centrum",
   "h1": "Apartament w centrum Avoli",
   "short": "seba-1",
-  "citySlug": "avola"
+  "citySlug": "avola",
+  "street": "via Giovanni Huss",
+  "geo": [
+   36.90841,
+   15.14098
+  ]
  },
  {
   "id": "seba2",

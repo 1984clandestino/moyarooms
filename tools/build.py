@@ -243,17 +243,19 @@ def crumbs(items):
     return '<nav class="crumbs" aria-label="Jesteś tutaj">' + ''.join(parts) + '</nav>', ld
 
 
-def card(a, heading='h3'):
+def card(a, heading='h3', cover=False):
     u = url_of(a)
     n = len(a['imgs'])
     first = a['imgs'][0]
+    if cover and a.get('cover'):
+        first = next((im for im in a['imgs'] if im[0] == a['cover']), first)
     tags = ''.join(f'<span>{e(t)}</span>' for t in a.get('tags', []))
     units = ''
     if a.get('units'):
         units = '<ul class="units">' + ''.join(f'<li><b>{e(x[0])}</b> – {e(x[1])}</li>' for x in a['units']) + '</ul>'
     city = CITY[a['citySlug']]
     wa_t = f"Dzień dobry! Interesuje mnie {a['title']} {city['loc']} ({a['name']}). {SITE}{u}"
-    return f'''<article class="apt">
+    return f'''<article class="apt" data-city="{e(a['citySlug'])}">
 <a class="ph" href="{u}">{pic(first[0], a['title'] + ' ' + city['loc'] + ' – ' + first[1], '(max-width: 700px) 92vw, 380px')}<span class="n">{n} {plural_zdjec(n)}</span></a>
 <div class="in"><{heading}><a href="{u}">{e(a['title'])}</a></{heading}><div class="sub">{e(a['name'])}</div><div class="where">{e(a['where'])}</div>
 <p>{e(a.get('desc', ''))}</p>{units}{'<div class="tags">' + tags + '</div>' if tags else ''}
@@ -351,6 +353,106 @@ def build_home():
     return page(path='/', title='Moya Rooms – Apartamenty we Włoszech',
                 description='Apartamenty na południu Włoch: Katania, Palermo i Avola. Obsługa i rezerwacja po polsku.',
                 body=body)
+
+
+# ---------- home nuova (anteprima in /anteprima/) ----------
+# Regioni in arrivo: le scrive Michał, si tolgono quando arrivano i primi appartamenti
+SOON_REGIONS = ['Kalabria', 'Apulia']
+# Foto del mosaico in alto: (foto, città, slug appartamento)
+HOME_MOSAIC = [('iwona-02', 'Palermo', 'palermo/apartament-przy-katedrze'),
+               ('seba2-01', 'Avola', 'avola/apartament-z-basenem'),
+               ('adriana-09', 'Katania', 'katania/apartament-przy-morzu')]
+
+
+def plural_apt(n):
+    if n == 1:
+        return 'apartament'
+    if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14):
+        return 'apartamenty'
+    return 'apartamentów'
+
+
+def build_home_v2():
+    regions = []
+    for a in APTS:
+        if a['region'] not in regions:
+            regions.append(a['region'])
+    reg = ''.join(f'<li class="on"><a href="#apartamenty"><strong>{e(r)}</strong> {sum(a["region"] == r for a in APTS)} {plural_apt(sum(a["region"] == r for a in APTS))}</a></li>' for r in regions)
+    reg += ''.join(f'<li>{e(r)} – wkrótce</li>' for r in SOON_REGIONS if r not in regions)
+    mosaic = ''
+    for i, (f, c, u) in enumerate(HOME_MOSAIC):
+        apt = next(a for a in APTS if url_of(a) == f'/{u}/')
+        alt = f"{apt['title']} – {c}"
+        mosaic += f'<a href="/{u}/">{pic(f, alt, "(max-width: 700px) 48vw, 320px", eager=(i == 0))}<span>{e(c)}</span></a>'
+    cities = []
+    for a in APTS:
+        if a['citySlug'] not in cities:
+            cities.append(a['citySlug'])
+    tabs = f'<button type="button" aria-pressed="true" data-c="all">Wszystkie <b>{len(APTS)}</b></button>' + ''.join(
+        f'<button type="button" aria-pressed="false" data-c="{c}">{e(CITY[c]["name"])} <b>{sum(a["citySlug"] == c for a in APTS)}</b></button>' for c in cities)
+    pts = []
+    for a in APTS:
+        if a.get('geo'):
+            pts.append({'lat': a['geo'][0], 'lng': a['geo'][1], 'url': url_of(a), 'title': a['title'],
+                        'where': f"{CITY[a['citySlug']]['name']} · {a['street']}",
+                        'img': f"/img/w/{(a.get('cover') or a['imgs'][0][0])}-480.webp"})
+    body = f'''<section class="hm-hero band">
+<div class="wrap">
+<div>
+<h1>Apartamenty na południu Włoch</h1>
+<p class="lead">Wybierz apartament i napisz do nas na WhatsApp. Odpowiadamy po polsku, a rezerwujesz bezpośrednio.</p>
+<ul class="hm-regions">{reg}</ul>
+<div class="acts">
+<a class="btn main" href="#apartamenty">Zobacz apartamenty</a>
+<a class="btn" href="{e(wa('Dzień dobry! Piszę ze strony Moya Rooms.'))}">Napisz na WhatsApp</a>
+</div>
+</div>
+<div class="hm-mosaic">{mosaic}</div>
+</div>
+</section>
+
+<section class="hm-why band">
+<div class="wrap">
+<div><h2>Po polsku</h2><p>Piszesz do nas na WhatsApp i o wszystko pytasz po polsku – przed przyjazdem i na miejscu.</p></div>
+<div><h2>Dojazd i parking</h2><p>Przy każdym apartamencie opisujemy, jak dojechać z lotniska i gdzie zaparkować.</p></div>
+<div><h2>Auto na miejscu</h2><p>Samochód na wakacje wynajmiesz u nas, w <a href="{HOME_CAR['url']}">Moya Travel</a>.</p></div>
+</div>
+</section>
+
+<section id="apartamenty" class="band">
+<div class="wrap">
+<h2>Nasze apartamenty</h2>
+<div class="hm-tabs" id="hmTabs" role="group" aria-label="Miasto">{tabs}</div>
+<div class="grid" id="hmList">
+{chr(10).join(card(a, cover=True) for a in APTS)}
+</div>
+</div>
+</section>
+
+<section id="mapa" class="band" style="background:var(--sand)">
+<div class="wrap">
+<h2>Gdzie są nasze apartamenty</h2>
+<p class="hm-maptxt">Dotknij punktu, żeby zobaczyć apartament. Zaznaczamy ulicę, nie dokładny adres.</p>
+<div class="hm-map" id="hmMap" data-pts="{e(json.dumps(pts, ensure_ascii=False))}" role="region" aria-label="Mapa apartamentów"></div>
+</div>
+</section>
+
+<section id="rezerwacja" class="band">
+<div class="wrap">
+<h2>Jak zarezerwować</h2>
+<div class="steps">
+<div class="step"><h3>Napisz do nas</h3><p>Na WhatsApp lub e-mailem: termin, liczba osób i apartament, który Cię interesuje.</p></div>
+<div class="step"><h3>Sprawdzamy dostępność</h3><p>Odpowiadamy po polsku i wysyłamy cenę za Twój termin.</p></div>
+<div class="step"><h3>Potwierdzamy rezerwację</h3><p>Dostajesz potwierdzenie i wszystkie informacje o przyjeździe.</p></div>
+</div>
+</div>
+</section>
+'''
+    home = build_home()
+    owners = home[home.index('<section id="dla-wlascicieli"'):home.index('<section id="wycieczki"')]
+    body += owners + '<script src="/js/home2.js" defer></script>\n'
+    return page(path='/anteprima/', title='Moya Rooms – Apartamenty na południu Włoch',
+                description='Apartamenty na południu Włoch z obsługą po polsku.', body=body, noindex=True)
 
 
 # ---------- città ----------
@@ -492,6 +594,7 @@ def write(rel, content):
 
 def main():
     write('index.html', build_home())
+    write('anteprima/index.html', build_home_v2())
     urls = ['/']
     for c in CITIES:
         write(f"{c['slug']}/index.html", build_city(c))

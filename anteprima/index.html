@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moya Rooms – Apartamenty na południu Włoch</title>
+<meta name="description" content="Apartamenty na południu Włoch z obsługą po polsku.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://moyarooms.com/anteprima/">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="Moya Rooms">
+<meta property="og:title" content="Moya Rooms – Apartamenty na południu Włoch">
+<meta property="og:description" content="Apartamenty na południu Włoch z obsługą po polsku.">
+<meta property="og:url" content="https://moyarooms.com/anteprima/">
+<meta property="og:image" content="https://moyarooms.com/img/hero.jpg">
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Outfit';font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/outfit-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Outfit';font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/outfit-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Outfit';font-style:normal;font-display:swap;font-weight:600;src:url(/fonts/outfit-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Outfit';font-style:normal;font-display:swap;font-weight:600;src:url(/fonts/outfit-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:400;src:url(/fonts/dm-sans-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:400;src:url(/fonts/dm-sans-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/dm-sans-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/dm-sans-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#1f1610);--sand:light-dark(#EFE6D8,#2b2018);--card:light-dark(#ffffff,#2f241b);
+--ink:light-dark(#3b2a20,#f1e8db);--soft:light-dark(#6b5444,#cdbca8);--brown:light-dark(#8B5A3C,#d9a57f);
+--blue:#187896;--blue-ink:light-dark(#176f89,#7cc8de);--line:light-dark(#e2d8c8,#4a3a2d);
+--sky:light-dark(#e8f3f7,#24363f);--todo:light-dark(#fff4d6,#4a3b16)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Outfit,system-ui,sans-serif;color:var(--brown);line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,54px);font-weight:600}
+h2{font-size:clamp(26px,4vw,36px);font-weight:600;margin-bottom:10px}
+h3{font-size:21px;font-weight:600}
+p{margin:0}
+a{color:var(--blue-ink)}
+img{max-width:100%;display:block}
+.band{padding:clamp(36px,6vw,80px) max(5vw,16px)}
+.wrap{max-width:1180px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;font:500 16px "DM Sans",sans-serif;text-decoration:none;border:2px solid var(--blue);cursor:pointer;transition:transform .15s;background:transparent;color:var(--blue-ink)}
+.btn:hover{transform:translateY(-1px)}
+.btn.main{background:var(--blue);color:#fff}
+.btn.sm{min-height:40px;padding:0 14px;font-size:15px}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.todo{background:var(--todo);color:var(--ink);border:1.5px dashed #c99a2e;border-radius:6px;padding:1px 6px;font-size:.9em}
+.draft{background:var(--todo);color:var(--ink);text-align:center;font-size:14px;padding:8px 16px;border-bottom:1.5px dashed #c99a2e}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px max(5vw,16px);max-width:1280px;margin:0 auto}
+.logo{font-family:Outfit,sans-serif;font-weight:600;font-size:22px;color:var(--brown);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.logo img{width:40px;height:40px;display:block}
+@media (max-width:440px){.logo{font-size:19px;gap:7px}.logo img{width:30px;height:30px}}
+.links{display:flex;gap:4px 18px;flex-wrap:wrap;align-items:center}
+.links a{color:var(--ink);text-decoration:none;font-size:15px;padding:8px 0}
+.links a:hover{color:var(--blue-ink)}
+.hero{background:var(--sand)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--soft);margin:18px 0 24px;max-width:34em}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chips span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;color:var(--brown)}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.arch{margin:0;border:10px solid #8B5A3C;border-radius:48% 48% 14px 14px / 34% 34% 14px 14px;overflow:hidden;aspect-ratio:4/4.4;background:var(--sky)}
+.arch img{width:100%;height:100%;object-fit:cover}
+figcaption{font-size:13px;color:var(--soft);margin-top:8px;text-align:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.filters button{min-height:40px;padding:0 16px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--brown);border-color:var(--brown);color:#fff}
+.region{margin-top:30px}
+.region>h3{font-size:24px;display:flex;align-items:baseline;gap:10px}
+.region>h3 small{font:400 15px "DM Sans",sans-serif;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin-top:16px}
+.apt{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.ph{aspect-ratio:4/3;background:var(--sky);position:relative;display:grid;place-items:center;border:0;padding:0;width:100%;cursor:pointer;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ph:hover img{transform:scale(1.03)}
+.ph .n{position:absolute;right:10px;bottom:10px;background:rgba(31,22,16,.72);color:#fff;font-size:13px;border-radius:8px;padding:4px 10px}
+.ph b{font-family:Outfit,sans-serif;font-size:60px;color:var(--brown);opacity:.25}
+.ph .todo{position:absolute;left:12px;bottom:10px}
+.in{padding:18px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.where{color:var(--blue-ink);font-weight:500;font-size:15px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{background:var(--sand);color:var(--brown);border-radius:8px;padding:4px 10px;font-size:14px}
+.in p{color:var(--soft)}
+.units{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.units li{border-left:3px solid var(--blue);padding-left:10px;color:var(--soft)}
+.units b{color:var(--ink);font-weight:500}
+.more{border-top:1px solid var(--line);padding-top:10px}
+.more summary{cursor:pointer;color:var(--blue-ink);font-weight:500;min-height:32px;display:flex;align-items:center}
+.more p{margin-top:8px;font-size:15px}
+.more b{color:var(--ink);font-weight:500}
+.foot{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:6px}
+.cin{font-size:13px;color:var(--soft)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px;margin-top:24px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font:600 18px Outfit,sans-serif;margin-bottom:14px}
+.step p{color:var(--soft);margin-top:6px}
+.contact{background:#8B5A3C;color:#fff}
+.contact h2{color:#fff}
+.contact .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;align-items:center}
+.contact p{color:#f3e7da;font-size:17px}
+.cbox{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:22px;display:grid;gap:12px}
+.cbox .big{color:#fff;font-size:20px;font-weight:500;white-space:nowrap}
+.cbox a{color:#fff}
+footer{background:var(--sand);color:var(--soft);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.fab{position:fixed;right:18px;bottom:18px;z-index:6;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.fab svg{width:30px;height:30px}
+.lb{position:fixed;inset:0;z-index:20;background:rgba(15,10,6,.92);display:none;align-items:center;justify-content:center;padding:56px 12px 70px}
+.lb.on{display:flex}
+.lb img{max-width:min(1100px,100%);max-height:100%;object-fit:contain;border-radius:8px}
+.lb button{position:absolute;min-width:48px;min-height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer}
+.lb .x{top:10px;right:10px}.lb .pv{left:10px;top:50%;transform:translateY(-50%)}.lb .nx{right:10px;top:50%;transform:translateY(-50%)}
+.lb .cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#f1e8db;font-size:15px}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.arch{max-width:440px;margin-inline:auto;width:100%}}
+@media(max-width:600px){.links a.hide-s{display:none}.acts .btn{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.ph img{transition:none}}
+.chips a{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;color:var(--brown);text-decoration:none}
+.chips a:hover{border-color:var(--brown)}
+.ph{text-decoration:none}
+.apt h3 a{color:inherit;text-decoration:none}
+.apt h3 a:hover{text-decoration:underline}
+.sub{font-size:14px;color:var(--soft);margin-top:-6px}
+.foot .bts{display:flex;gap:8px;flex-wrap:wrap}
+.crumbs{font-size:14px;color:var(--soft);margin:0 0 14px;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs a{color:var(--soft)}
+.crumbs span[aria-hidden]{opacity:.6}
+.phead{background:var(--sand);padding-bottom:clamp(24px,4vw,40px)}
+.phead .lead{margin:12px 0 0}
+.phead .sub{margin-top:8px;font-size:15px}
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;border-radius:16px;overflow:hidden;aspect-ratio:16/8;margin-top:22px}
+.gal button{border:0;padding:0;margin:0;cursor:pointer;position:relative;background:var(--sky);overflow:hidden}
+.gal button:first-child{grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gal button:hover img{transform:scale(1.03)}
+.gal .all{position:absolute;right:10px;bottom:10px;background:rgba(31,22,16,.78);color:#fff;font:500 14px "DM Sans",sans-serif;border-radius:8px;padding:6px 12px}
+.pbody{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(24px,4vw,48px);align-items:start}
+.pbody h2{font-size:clamp(22px,3vw,28px);margin:30px 0 12px}
+.pbody h2:first-child{margin-top:0}
+.pbody .desc{font-size:17px;color:var(--ink)}
+.eq{columns:2;column-gap:28px;padding-left:18px;margin:0;color:var(--soft)}
+.eq li{margin:3px 0;break-inside:avoid}
+.facts{margin:0;display:grid;gap:12px}
+.facts div{border-left:3px solid var(--blue);padding-left:12px}
+.facts dt{font-weight:500;color:var(--ink)}
+.facts dd{margin:2px 0 0;color:var(--soft)}
+.box{position:sticky;top:90px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
+.box h2{margin:0;font-size:22px}
+.box p{color:var(--soft);font-size:15px}
+.box .cin{font-size:13px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:4px}
+.thumbs button{border:0;padding:0;cursor:pointer;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:var(--sky)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.cityintro{max-width:46em;color:var(--soft);font-size:17px;margin-top:12px}
+.err{min-height:50vh;display:grid;place-items:center;text-align:center}
+@media(max-width:900px){.pbody{grid-template-columns:1fr}.box{position:static}}
+@media(max-width:700px){.gal{grid-template-columns:1fr;grid-template-rows:auto;aspect-ratio:4/3}.gal button:not(:first-child){display:none}.gal button:first-child{grid-row:auto}.eq{columns:1}}
+.carband{background:var(--sky)}
+.carband .wrap{display:flex;gap:18px 32px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.carband h2{font-size:clamp(22px,3vw,28px);margin-bottom:6px}
+.carband p{color:var(--soft);max-width:40em}
+.prose{max-width:48em}
+.prose>p,.prose>ul{margin:0 0 14px}
+.prose h3{font-size:20px;margin:26px 0 10px}
+.prose h2+p,.prose h2+h3{margin-top:0}
+.prose ul{padding-left:1.25em}
+.prose li{margin:6px 0}
+.prose li ul{margin:6px 0 0}
+.prose strong{font-weight:600;color:var(--ink)}
+.prose .nota{font-size:14px;color:var(--soft);margin-top:18px}
+.links a.own{border:1.5px solid var(--blue);border-radius:999px;padding:5px 12px;color:var(--blue-ink);font-weight:500}
+.links a.own:hover{background:var(--blue);color:#fff}
+@media(max-width:480px){.links a.own{display:none}}
+.owners .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:center}
+.owners .kick{margin:0 0 6px;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-ink)}
+.owners h2{margin-bottom:12px}
+.ticks{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.ticks li{padding-left:28px;position:relative}
+.ticks li::before{content:"✓";position:absolute;left:4px;color:var(--blue-ink);font-weight:700}
+.obox{background:var(--sand);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
+.obox .big{font-size:18px;font-weight:500;white-space:nowrap}
+.obox .itline{margin:4px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--soft)}
+[hidden]{display:none!important}
+.hm-hero{padding-top:clamp(28px,5vw,64px)}
+.hm-hero .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:28px clamp(32px,5vw,64px);align-items:center}
+.hm-hero h1{font-size:clamp(34px,5.6vw,58px);margin:0 0 14px}
+.hm-hero .lead{color:var(--soft);font-size:17px;max-width:30em;margin:0 0 18px}
+.hm-regions{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px}
+.hm-regions li{border:1.5px dashed var(--line);border-radius:999px;padding:7px 14px;font-size:15px;color:var(--soft)}
+.hm-regions li.on{border:1.5px solid var(--brown);padding:0}
+.hm-regions li.on a{display:block;padding:7px 14px;color:var(--ink);text-decoration:none}
+.hm-regions strong{color:var(--brown)}
+.hm-hero .acts{display:flex;gap:10px;flex-wrap:wrap}
+.hm-mosaic{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:clamp(380px,62vw,560px)}
+.hm-mosaic a{position:relative;border-radius:16px;overflow:hidden;display:block}
+.hm-mosaic a:first-child{grid-row:1/3}
+.hm-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.hm-mosaic a:nth-child(3) img{object-position:center 80%}
+.hm-mosaic span{position:absolute;left:10px;bottom:10px;background:rgba(31,22,16,.72);color:#fff;font-size:14px;font-weight:500;padding:5px 11px;border-radius:8px}
+.hm-why{background:var(--sand);padding-block:clamp(28px,4vw,44px)}
+.hm-why .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px 40px}
+.hm-why h2{font-size:20px;margin:0 0 6px}
+.hm-why p{margin:0;color:var(--soft)}
+.hm-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:14px -4px 22px;padding:2px 4px}
+.hm-tabs button{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.hm-tabs button b{font-weight:500;font-size:14px;color:var(--soft)}
+.hm-tabs button[aria-pressed=true]{background:var(--brown);border-color:var(--brown);color:#fff}
+.hm-tabs button[aria-pressed=true] b{color:#f3e7da}
+#hmList .apt p,#hmList .apt .units{display:none}
+#hmList .apt .tags span:nth-child(n+4){display:none}
+.hm-maptxt{color:var(--soft);margin:6px 0 16px}
+.hm-map{height:clamp(340px,55vw,480px);border-radius:16px;overflow:hidden;background:#dfe8ea;border:1px solid var(--line)}
+.hm-pin span{display:block;width:24px;height:24px;border-radius:50%;background:#8B5A3C;border:4px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.35)}
+.hm-pop{display:grid;gap:2px;text-decoration:none;color:var(--ink);width:190px}
+.hm-pop img{width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:6px}
+.hm-pop strong{color:#8B5A3C;font:600 15px Outfit,sans-serif}
+.hm-pop span{font-size:13px;color:#6b5444}
+.hm-pop em{font-style:normal;color:#176f89;font-size:13px;margin-top:4px;text-decoration:underline}
+@media(max-width:600px){.hm-hero .acts .btn{flex:1 1 100%}}
+</style>
+</head>
+<body>
+
+<header>
+<nav class="nav" aria-label="Menu główne">
+<a class="logo" href="/"><img src="/img/logo-mark.png" alt="" width="40" height="40">Moya Rooms</a>
+<div class="links">
+<a href="/#apartamenty">Apartamenty</a>
+<a href="/#rezerwacja" class="hide-s">Jak zarezerwować</a>
+<a href="#kontakt">Kontakt</a>
+<a class="own" href="/modulo/?lang=pl">Dodaj obiekt</a>
+</div>
+</nav>
+</header>
+
+<main id="top">
+<section class="hm-hero band">
+<div class="wrap">
+<div>
+<h1>Apartamenty na południu Włoch</h1>
+<p class="lead">Wybierz apartament i napisz do nas na WhatsApp. Odpowiadamy po polsku, a rezerwujesz bezpośrednio.</p>
+<ul class="hm-regions"><li class="on"><a href="#apartamenty"><strong>Sycylia</strong> 5 apartamentów</a></li><li>Kalabria – wkrótce</li><li>Apulia – wkrótce</li></ul>
+<div class="acts">
+<a class="btn main" href="#apartamenty">Zobacz apartamenty</a>
+<a class="btn" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20Moya%20Rooms.">Napisz na WhatsApp</a>
+</div>
+</div>
+<div class="hm-mosaic"><a href="/palermo/apartament-przy-katedrze/"><img src="/img/iwona-02.jpg" srcset="/img/w/iwona-02-480.webp 480w, /img/w/iwona-02-960.webp 960w" sizes="(max-width: 700px) 48vw, 320px" alt="Apartament przy katedrze – Palermo" width="1200" height="1600" fetchpriority="high"><span>Palermo</span></a><a href="/avola/apartament-z-basenem/"><img src="/img/seba2-01.jpg" srcset="/img/w/seba2-01-480.webp 480w, /img/w/seba2-01-960.webp 960w, /img/w/seba2-01-1600.webp 1600w" sizes="(max-width: 700px) 48vw, 320px" alt="Apartament z basenem – Avola" width="1600" height="1200" loading="lazy" decoding="async"><span>Avola</span></a><a href="/katania/apartament-przy-morzu/"><img src="/img/adriana-09.jpg" srcset="/img/w/adriana-09-480.webp 480w" sizes="(max-width: 700px) 48vw, 320px" alt="Apartament przy morzu – Katania" width="918" height="687" loading="lazy" decoding="async"><span>Katania</span></a></div>
+</div>
+</section>
+
+<section class="hm-why band">
+<div class="wrap">
+<div><h2>Po polsku</h2><p>Piszesz do nas na WhatsApp i o wszystko pytasz po polsku – przed przyjazdem i na miejscu.</p></div>
+<div><h2>Dojazd i parking</h2><p>Przy każdym apartamencie opisujemy, jak dojechać z lotniska i gdzie zaparkować.</p></div>
+<div><h2>Auto na miejscu</h2><p>Samochód na wakacje wynajmiesz u nas, w <a href="https://moyatravel.com/wynajem-samochodu-wlochy/">Moya Travel</a>.</p></div>
+</div>
+</section>
+
+<section id="apartamenty" class="band">
+<div class="wrap">
+<h2>Nasze apartamenty</h2>
+<div class="hm-tabs" id="hmTabs" role="group" aria-label="Miasto"><button type="button" aria-pressed="true" data-c="all">Wszystkie <b>5</b></button><button type="button" aria-pressed="false" data-c="katania">Katania <b>2</b></button><button type="button" aria-pressed="false" data-c="palermo">Palermo <b>1</b></button><button type="button" aria-pressed="false" data-c="avola">Avola <b>2</b></button></div>
+<div class="grid" id="hmList">
+<article class="apt" data-city="katania">
+<a class="ph" href="/katania/apartament-przy-morzu/"><img src="/img/adriana-09.jpg" srcset="/img/w/adriana-09-480.webp 480w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament przy morzu w Katanii – Morze w San Giovanni Li Cuti" width="918" height="687" loading="lazy" decoding="async"><span class="n">10 zdjęć</span></a>
+<div class="in"><h3><a href="/katania/apartament-przy-morzu/">Apartament przy morzu</a></h3><div class="sub">App. Adriana</div><div class="where">Katania · via San Giovanni Li Cuti, 5 m od morza</div>
+<p>Całe mieszkanie z niezależnym wejściem w sercu rybackiej osady San Giovanni Li Cuti – kilka metrów od małego portu i czarnej plaży, blisko centrum Katanii.</p><div class="tags"><span>do 4 osób</span><span>80 m²</span><span>sypialnia z łóżkiem małżeńskim</span><span>rozkładana sofa w salonie</span><span>minimalny pobyt: 1 noc</span></div>
+<div class="foot"><span class="cin">CIN: IT087015C2GIH6N5EO</span><span class="bts"><a class="btn sm" href="/katania/apartament-przy-morzu/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20przy%20morzu%20w%20Katanii%20%28App.%20Adriana%29.%20https%3A//moyarooms.com/katania/apartament-przy-morzu/">Zapytaj o termin</a></span></div></div>
+</article>
+<article class="apt" data-city="katania">
+<a class="ph" href="/katania/apartament-w-centrum/"><img src="/img/peppe-05.jpg" srcset="/img/w/peppe-05-480.webp 480w, /img/w/peppe-05-960.webp 960w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament w centrum w Katanii – Pokój z balkonem" width="1280" height="853" loading="lazy" decoding="async"><span class="n">12 zdjęć</span></a>
+<div class="in"><h3><a href="/katania/apartament-w-centrum/">Apartament w centrum</a></h3><div class="sub">App. Peppe</div><div class="where">Katania · via Riccardo da Lentini, 300 m od centrum</div>
+<p>Duże mieszkanie w zabytkowej kamienicy w samym sercu Katanii, kilka kroków od Piazza Duomo. Pod domem lokale i street food – samochód nie jest potrzebny.</p><ul class="units"><li><b>2 pokoje trzyosobowe</b> – łóżko małżeńskie + pojedyncze, każdy z własną prywatną łazienką (poza pokojem); jeden z widokiem na miasto</li><li><b>Mini-apartament</b> – pokój z kuchnią i łazienką: łóżko małżeńskie + 2 dostawki, do 4 osób</li><li><b>Całe mieszkanie</b> – do 12 osób</li></ul>
+<div class="foot"><span class="cin">CIN: IT087015C2TU2PDBYJ</span><span class="bts"><a class="btn sm" href="/katania/apartament-w-centrum/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20w%20centrum%20w%20Katanii%20%28App.%20Peppe%29.%20https%3A//moyarooms.com/katania/apartament-w-centrum/">Zapytaj o termin</a></span></div></div>
+</article>
+<article class="apt" data-city="palermo">
+<a class="ph" href="/palermo/apartament-przy-katedrze/"><img src="/img/iwona-01.jpg" srcset="/img/w/iwona-01-480.webp 480w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament przy katedrze w Palermo – Widok z balkonu na katedrę i palmy" width="934" height="1600" loading="lazy" decoding="async"><span class="n">14 zdjęć</span></a>
+<div class="in"><h3><a href="/palermo/apartament-przy-katedrze/">Apartament przy katedrze</a></h3><div class="sub">App. Iwona</div><div class="where">Palermo · Piazza della Vittoria, obok katedry</div>
+<p>Elegancka zabytkowa rezydencja przy Piazza della Vittoria, z widokiem na katedrę i palmowy park Villa Bonanno. Do Quattro Canti dojdziesz w ok. 5 minut.</p><ul class="units"><li><b>Poziom dolny</b> – 2 sypialnie z widokiem na katedrę, 2 łazienki, duży salon z widokiem na park i w pełni wyposażona kuchnia</li><li><b>Poziom górny</b> – sypialnia małżeńska z prywatną łazienką i widokiem na katedrę oraz jasna sypialnia z łóżkami pojedynczymi</li></ul><div class="tags"><span>do 8 osób, z dostawkami do 12</span><span>240 m² na dwóch poziomach</span><span>4 sypialnie</span><span>3 łazienki</span></div>
+<div class="foot"><span class="cin">CIN: IT082053C2KSACSU6J</span><span class="bts"><a class="btn sm" href="/palermo/apartament-przy-katedrze/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20przy%20katedrze%20w%20Palermo%20%28App.%20Iwona%29.%20https%3A//moyarooms.com/palermo/apartament-przy-katedrze/">Zapytaj o termin</a></span></div></div>
+</article>
+<article class="apt" data-city="avola">
+<a class="ph" href="/avola/apartament-w-centrum/"><img src="/img/seba1-01.jpg" srcset="/img/w/seba1-01-480.webp 480w, /img/w/seba1-01-960.webp 960w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament w centrum w Avoli – Kuchnia z jadalnią i łóżkiem" width="1200" height="1600" loading="lazy" decoding="async"><span class="n">13 zdjęć</span></a>
+<div class="in"><h3><a href="/avola/apartament-w-centrum/">Apartament w centrum</a></h3><div class="sub">App. Seba 1</div><div class="where">Avola · via Giovanni Huss, 400 m od starego miasta, 500 m od morza</div>
+<p>Nowo urządzone mieszkanie na parterze (65 m²) z niezależnym wejściem, w spokojnej okolicy – kilka minut spacerem od zabytkowego centrum Avoli i od plaży Pantanello. Duża kuchnia z jadalnią, osobna sypialnia i słoneczny taras na piętrze.</p><div class="tags"><span>2–4 osoby</span><span>65 m²</span><span>parter, niezależne wejście</span><span>słoneczny taras</span><span>bezpłatny parking</span><span>zwierzęta na życzenie</span></div>
+<div class="foot"><span class="cin">CIN: IT089002C2IFIP2FLD</span><span class="bts"><a class="btn sm" href="/avola/apartament-w-centrum/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20w%20centrum%20w%20Avoli%20%28App.%20Seba%201%29.%20https%3A//moyarooms.com/avola/apartament-w-centrum/">Zapytaj o termin</a></span></div></div>
+</article>
+<article class="apt" data-city="avola">
+<a class="ph" href="/avola/apartament-z-basenem/"><img src="/img/seba2-01.jpg" srcset="/img/w/seba2-01-480.webp 480w, /img/w/seba2-01-960.webp 960w, /img/w/seba2-01-1600.webp 1600w" sizes="(max-width: 700px) 92vw, 380px" alt="Apartament z basenem w Avoli – Basen z leżakami" width="1600" height="1200" loading="lazy" decoding="async"><span class="n">16 zdjęć</span></a>
+<div class="in"><h3><a href="/avola/apartament-z-basenem/">Apartament z basenem</a></h3><div class="sub">App. Seba 2</div><div class="where">Avola · ok. 3 km od centrum, 1,5 km od plaży</div>
+<p>Przestronne mieszkanie (120 m²) na pierwszym piętrze willi z basenem i ogrodem. Trzy sypialnie, dwie kuchnie, dwie łazienki i taras ze stołem i kanapami – wygodne dla dwóch rodzin lub grupy znajomych.</p><div class="tags"><span>do 8 osób</span><span>120 m²</span><span>3 sypialnie</span><span>2 kuchnie</span><span>2 łazienki</span><span>basen</span><span>prywatny parking</span></div>
+<div class="foot"><span class="cin">CIN: IT089002C23GA55GMW</span><span class="bts"><a class="btn sm" href="/avola/apartament-z-basenem/">Szczegóły</a><a class="btn sm main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Interesuje%20mnie%20Apartament%20z%20basenem%20w%20Avoli%20%28App.%20Seba%202%29.%20https%3A//moyarooms.com/avola/apartament-z-basenem/">Zapytaj o termin</a></span></div></div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="mapa" class="band" style="background:var(--sand)">
+<div class="wrap">
+<h2>Gdzie są nasze apartamenty</h2>
+<p class="hm-maptxt">Dotknij punktu, żeby zobaczyć apartament. Zaznaczamy ulicę, nie dokładny adres.</p>
+<div class="hm-map" id="hmMap" data-pts="[{&quot;lat&quot;: 37.52003, &quot;lng&quot;: 15.11012, &quot;url&quot;: &quot;/katania/apartament-przy-morzu/&quot;, &quot;title&quot;: &quot;Apartament przy morzu&quot;, &quot;where&quot;: &quot;Katania · via San Giovanni Li Cuti&quot;, &quot;img&quot;: &quot;/img/w/adriana-09-480.webp&quot;}, {&quot;lat&quot;: 37.50004, &quot;lng&quot;: 15.08373, &quot;url&quot;: &quot;/katania/apartament-w-centrum/&quot;, &quot;title&quot;: &quot;Apartament w centrum&quot;, &quot;where&quot;: &quot;Katania · via Riccardo da Lentini&quot;, &quot;img&quot;: &quot;/img/w/peppe-05-480.webp&quot;}, {&quot;lat&quot;: 38.1119, &quot;lng&quot;: 13.3546, &quot;url&quot;: &quot;/palermo/apartament-przy-katedrze/&quot;, &quot;title&quot;: &quot;Apartament przy katedrze&quot;, &quot;where&quot;: &quot;Palermo · Piazza della Vittoria&quot;, &quot;img&quot;: &quot;/img/w/iwona-01-480.webp&quot;}, {&quot;lat&quot;: 36.90841, &quot;lng&quot;: 15.14098, &quot;url&quot;: &quot;/avola/apartament-w-centrum/&quot;, &quot;title&quot;: &quot;Apartament w centrum&quot;, &quot;where&quot;: &quot;Avola · via Giovanni Huss&quot;, &quot;img&quot;: &quot;/img/w/seba1-01-480.webp&quot;}]" role="region" aria-label="Mapa apartamentów"></div>
+</div>
+</section>
+
+<section id="rezerwacja" class="band">
+<div class="wrap">
+<h2>Jak zarezerwować</h2>
+<div class="steps">
+<div class="step"><h3>Napisz do nas</h3><p>Na WhatsApp lub e-mailem: termin, liczba osób i apartament, który Cię interesuje.</p></div>
+<div class="step"><h3>Sprawdzamy dostępność</h3><p>Odpowiadamy po polsku i wysyłamy cenę za Twój termin.</p></div>
+<div class="step"><h3>Potwierdzamy rezerwację</h3><p>Dostajesz potwierdzenie i wszystkie informacje o przyjeździe.</p></div>
+</div>
+</div>
+</section>
+<section id="dla-wlascicieli" class="band owners">
+<div class="wrap">
+<div>
+<p class="kick">Dla właścicieli</p>
+<h2>Masz mieszkanie lub dom we Włoszech?</h2>
+<p>Dodaj swój obiekt do Moya Rooms. Pokażemy go turystom z Polski – po polsku, ze zdjęciami, opisem i informacjami o dojeździe.</p>
+<ul class="ticks">
+<li>Wypełniasz formularz i dodajesz zdjęcia – stronę obiektu przygotujemy my.</li>
+<li>Wyślemy Ci link do strony – jeśli zechcesz coś zmienić, poprawimy ją.</li>
+<li>W okresie próbnym publikacja jest bezpłatna.</li>
+</ul>
+</div>
+<div class="obox">
+<a class="btn main" href="/modulo/?lang=pl">Dodaj obiekt</a>
+<a class="btn" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Mam%20obiekt%20we%20W%C5%82oszech%20i%20chc%C4%99%20go%20doda%C4%87%20do%20Moya%20Rooms.">Napisz na WhatsApp</a>
+<div>lub zadzwoń: <a class="big" href="tel:+393446501947">+39 344 650 1947</a></div>
+<p lang="it" class="itline">Sei proprietario? <a href="/modulo/?lang=it">Compila il modulo in italiano →</a></p>
+</div>
+</div>
+</section>
+
+<script src="/js/home2.js" defer></script>
+
+<section class="band carband">
+<div class="wrap">
+<div>
+<h2>Szukasz samochodu?</h2>
+<p>Auto na wakacje wynajmiesz u nas, w Moya Travel – po polsku i bez stresu. Sprawdź: <a href="https://moyatravel.com/wynajem-samochodu-wlochy/">wynajem samochodu we Włoszech</a>.</p>
+</div>
+<a class="btn main" href="https://moyatravel.com/wynajem-samochodu-wlochy/">Bezpłatna wycena auta →</a>
+</div>
+</section>
+<section id="kontakt" class="contact band">
+<div class="wrap">
+<div>
+<h2>Kontakt</h2>
+<p>Napisz do nas po polsku – pomożemy wybrać apartament i termin.</p>
+</div>
+<div class="cbox">
+<a class="btn main" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20Moya%20Rooms.">Napisz na WhatsApp</a>
+<div>WhatsApp: <span class="big">+39 344 650 1947</span></div>
+<div>E-mail: <a class="big" href="mailto:info@moyarooms.com">info@moyarooms.com</a></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="band" style="padding-block:28px">
+<div class="wrap">
+<div><strong style="color:var(--brown)">Moya Rooms</strong> · MOYA RENT S.R.L.S. · P.IVA 03375650805 · Via Trapezzoli Sud 73, 89134 Reggio Calabria</div>
+<div><a href="/modulo/?lang=pl">Dla właścicieli: dodaj obiekt</a> · <a href="/polityka-prywatnosci.html">Polityka prywatności i cookies</a> · © <span id="y">2026</span></div>
+</div>
+</footer>
+
+<a class="fab" href="https://wa.me/393446501947?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20Moya%20Rooms." aria-label="Napisz na WhatsApp">
+<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.3z"/></svg>
+</a>
+<script src="/js/site.js" defer></script>
+</body>
+</html>
