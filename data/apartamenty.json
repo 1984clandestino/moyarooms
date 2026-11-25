@@ -589,6 +589,11 @@
   "title": "Apartament z basenem",
   "h1": "Apartament z basenem w Avoli",
   "short": "seba-2",
-  "citySlug": "avola"
+  "citySlug": "avola",
+  "street": "Viale America",
+  "geo": [
+   36.88596,
+   15.13517
+  ]
  }
 ]
