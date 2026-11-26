@@ -1,3 +1,5 @@
 # Moduli ricevuti sul server: non vanno mai nel repository
 _zgloszenia/*
 !_zgloszenia/.htaccess
+_calendari/*
+!_calendari/.htaccess

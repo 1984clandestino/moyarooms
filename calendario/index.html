@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moya Rooms – Calendario / Kalendarz</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+html[lang=it] .pl, html[lang=pl] .it{display:none!important}
+[hidden]{display:none!important}
+.lang{display:flex;gap:6px}
+.lang button{min-height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--blue);background:transparent;color:var(--blue-ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--blue);color:#fff}
+.cw{max-width:720px;margin:0 auto}
+.cw h1{font-size:clamp(28px,6vw,40px);margin:0 0 6px}
+.who{color:var(--soft);margin:0 0 18px}
+.how{background:var(--sky);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:10px 14px;font-size:15px;margin:0 0 18px}
+.apts{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -4px 16px;padding:2px 4px}
+.apts button{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px "DM Sans",sans-serif;cursor:pointer}
+.apts button[aria-pressed=true]{background:var(--brown);border-color:var(--brown);color:#fff}
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}
+.mhead h2{font-size:22px;margin:0;text-transform:capitalize}
+.mhead button{min-width:44px;min-height:44px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);font-size:20px;cursor:pointer;color:var(--ink)}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.wd{font-size:12px;color:var(--soft);text-align:center;padding:2px 0}
+.d{aspect-ratio:1;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);font:500 15px "DM Sans",sans-serif;color:var(--ink);cursor:pointer;padding:0;position:relative}
+.d.past{opacity:.35;cursor:default}
+.d.closed{background:repeating-linear-gradient(135deg,#d9cfc2 0 6px,#ece4d8 6px 12px);border-color:#bfae99}
+.d.moya{background:#8B5A3C;border-color:#8B5A3C;color:#fff}
+.d.ext{background:#1f6f8b;border-color:#1f6f8b;color:#fff}
+.d.today{outline:2px solid var(--blue);outline-offset:1px}
+.d.sel{box-shadow:0 0 0 3px #f2b84b inset}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--soft);margin:12px 0 0}
+.legend i{display:inline-block;width:16px;height:16px;border-radius:4px;border:1.5px solid var(--line);vertical-align:-3px;margin-right:6px}
+.legend .lc{background:repeating-linear-gradient(135deg,#d9cfc2 0 4px,#ece4d8 4px 8px)}
+.legend .lm{background:#8B5A3C;border-color:#8B5A3C}
+.legend .le{background:#1f6f8b;border-color:#1f6f8b}
+.bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 0 calc(12px + env(safe-area-inset-bottom));margin-top:14px;z-index:3}
+.bar p{margin:0 0 10px;font-weight:500}
+.bar .row{display:flex;gap:8px;flex-wrap:wrap}
+.bar .btn{flex:1 1 auto}
+.status{font-size:14px;color:var(--soft);margin:10px 0 0;min-height:1.4em}
+.status.err{color:#8c1d18}
+.sync{margin-top:28px;border-top:1px solid var(--line);padding-top:18px}
+.sync h3{font-size:19px;margin:0 0 8px}
+.sync p{font-size:15px;color:var(--soft);margin:0 0 8px}
+.sync input,.sync textarea{width:100%;font:15px "DM Sans",sans-serif;border:1.5px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);color:var(--ink)}
+.sync textarea{min-height:70px}
+.sync .row{display:flex;gap:8px;margin:6px 0 14px}
+.sync .row input{flex:1}
+.adm{margin-top:10px}
+.adm li{margin:0 0 14px}
+.adm .btn{min-height:40px;font-size:15px;padding:0 12px;margin:6px 6px 0 0}
+.adm form{display:grid;gap:8px;margin-top:10px}
+.adm input,.adm textarea{width:100%;font:15px "DM Sans",sans-serif;border:1.5px solid var(--line);border-radius:10px;padding:10px}
+</style>
+</head>
+<body>
+<header>
+<nav class="nav" aria-label="Moya Rooms">
+<a class="logo" href="/"><img src="/img/logo-mark.png" alt="" width="40" height="40">Moya Rooms</a>
+<div class="lang" role="group" aria-label="Lingua / Język">
+<button type="button" data-l="it" aria-pressed="true">Italiano</button>
+<button type="button" data-l="pl" aria-pressed="false">Polski</button>
+</div>
+</nav>
+</header>
+
+<main class="band" style="padding-top:28px">
+<div class="cw">
+<p id="boot" class="who"><span class="it">Caricamento…</span><span class="pl">Ładowanie…</span></p>
+
+<section id="cal" hidden>
+<h1><span class="it">Calendario disponibilità</span><span class="pl">Kalendarz dostępności</span></h1>
+<p class="who" id="ownerName"></p>
+<p class="how"><span class="it">Tocca il primo e l'ultimo giorno di un periodo, poi scegli <strong>Chiudi</strong> o <strong>Riapri</strong>. Ogni giorno è la notte che inizia quel giorno: il giorno di partenza degli ospiti resta libero.</span><span class="pl">Dotknij pierwszego i ostatniego dnia okresu, a potem wybierz <strong>Zamknij</strong> albo <strong>Otwórz</strong>. Każdy dzień to noc, która zaczyna się tego dnia: dzień wyjazdu gości pozostaje wolny.</span></p>
+<div class="apts" id="apts" role="group"></div>
+<div class="mhead">
+<button type="button" id="prev" aria-label="‹">‹</button>
+<h2 id="mtitle"></h2>
+<button type="button" id="next" aria-label="›">›</button>
+</div>
+<div class="grid7" id="wd"></div>
+<div class="grid7" id="days" style="margin-top:4px"></div>
+<div class="legend">
+<span><i></i><span class="it">Libero</span><span class="pl">Wolne</span></span>
+<span><i class="lc"></i><span class="it">Chiuso da te</span><span class="pl">Zamknięte przez Ciebie</span></span>
+<span><i class="lm"></i><span class="it">Prenotato con Moya Rooms</span><span class="pl">Rezerwacja Moya Rooms</span></span>
+<span><i class="le"></i><span class="it">Prenotato su Booking/Airbnb</span><span class="pl">Rezerwacja Booking/Airbnb</span></span>
+</div>
+<p class="status" id="status"></p>
+
+<div class="bar" id="bar" hidden>
+<p id="selText"></p>
+<div class="row" id="acts"></div>
+</div>
+
+<div class="sync">
+<h3><span class="it">Collega Booking e Airbnb</span><span class="pl">Połącz z Booking i Airbnb</span></h3>
+<p><span class="it">1. Copia questo link e incollalo su Booking o Airbnb in «Importa calendario»: le notti chiuse qui e le prenotazioni Moya Rooms si chiuderanno anche lì.</span><span class="pl">1. Skopiuj ten link i wklej go na Booking lub Airbnb w «Importuj kalendarz»: noce zamknięte tutaj i rezerwacje Moya Rooms zamkną się także tam.</span></p>
+<div class="row"><input id="exp" readonly><button type="button" class="btn" id="copyExp"><span class="it">Copia</span><span class="pl">Kopiuj</span></button></div>
+<p><span class="it">2. Incolla qui il link «Esporta calendario» di Booking o Airbnb (fino a 3, uno per riga): le loro prenotazioni compariranno qui, aggiornate ogni 3 ore circa.</span><span class="pl">2. Wklej tutaj link «Eksportuj kalendarz» z Booking lub Airbnb (do 3, każdy w nowej linii): ich rezerwacje pojawią się tutaj, aktualizowane mniej więcej co 3 godziny.</span></p>
+<textarea id="imp" placeholder="https://…ics"></textarea>
+<div class="row"><button type="button" class="btn main" id="saveImp"><span class="it">Salva i link</span><span class="pl">Zapisz linki</span></button></div>
+<p id="impStatus"></p>
+</div>
+</section>
+
+<section id="admin" hidden>
+<h1>Moya Rooms – <span class="it">calendari dei proprietari</span><span class="pl">kalendarze właścicieli</span></h1>
+<ul class="adm" id="owners" style="list-style:none;padding:0"></ul>
+<h3><span class="it">Nuovo proprietario</span><span class="pl">Nowy właściciel</span></h3>
+<form class="adm" id="newOwner">
+<input name="name" required placeholder="Nome / Imię i nazwisko">
+<textarea name="apts" required rows="4" placeholder="Appartamenti, uno per riga / Apartamenty, każdy w nowej linii"></textarea>
+<button class="btn main" type="submit"><span class="it">Crea e copia il link</span><span class="pl">Utwórz i skopiuj link</span></button>
+<p id="newLink" class="who"></p>
+</form>
+</section>
+</div>
+</main>
+<script src="/calendario/cal.js?v=1" defer></script>
+</body>
+</html>

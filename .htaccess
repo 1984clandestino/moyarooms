@@ -18,7 +18,7 @@ RewriteRule ^(formularz|dodaj)/?$ /modulo/?lang=pl [R=302,L]
 RewriteRule ^(dla-wlascicieli|wlasciciele)/?$ /proprietari/?lang=pl [R=302,L]
 
 # File di lavoro non pubblici
-RewriteRule ^(data|tools|_zgloszenia)/ - [F,L]
+RewriteRule ^(data|tools|_zgloszenia|_calendari)/ - [F,L]
 RewriteRule ^README\.md$ - [F,L]
 
 # Cache per foto, font, stile e script
